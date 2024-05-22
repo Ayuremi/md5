@@ -1,10 +1,10 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Rachel Gao
 
-### date x
+### 5/22/24
 
-info
+researching more on how to implement images into SSTV audio
 
 ### date y
 
