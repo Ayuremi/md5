@@ -4,11 +4,11 @@
 
 ### 5/22/24
 
-researching more on how to implement images into SSTV audio
+researching more on how to implement images into SSTV audio, found a few documents about different types of sstv (some easier than others)
 
-### date y
+### 5/23/24
 
-info
+We decided to switch our topic to coding the md5 algorithm. I looked for a few resources and websites that explained each step of md5 and also started a skeleton for the code.
 
 
 ## Nathaniel Ciu
