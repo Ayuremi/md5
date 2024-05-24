@@ -24,12 +24,18 @@ public class md5{
         }
 
         System.out.println(holder);
-
     }
 
     public static void encode(String line){
         
     }
+
+    public static void paddingPassword() {
+        // calculating how much padding is needed
+
+    }
+
+
 
     public static void decode(String line) {
         
