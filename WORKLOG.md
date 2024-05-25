@@ -21,3 +21,6 @@ Figuring out if we want to stick with audio steganography, specifically SSTV (ne
 
 ### 2024/05/23
 Switched to replicating MD5 because we couldn't find great documentation to debugg SSTV. Found resources to help with replciating MD5, we also have a [google doc](https://docs.google.com/document/d/1L5EoYW-sUBFakbkqqNC-GjzaK4cZB_PYZ6wepM9pxTg/edit?usp=sharing) if you want to check that out? 
+
+### 2024/05/24
+Coded a function with Rachel to change strings into their binary equivalent for debugging. Kinda started a padding function for step 1 of md5.
