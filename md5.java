@@ -1,6 +1,6 @@
 import java.nio.charset.StandardCharsets;
 
-public class md5{
+public class md5 {
     public static void main(String args[]){
         // System.out.println("Main is called");
 
@@ -9,7 +9,7 @@ public class md5{
         else{
             if (args[0].compareTo("encode") == 0) encode(args[1]);
             else if (args[0].compareTo("decode") == 0) decode(args[1]);
-            else if (args[0].compareTo("test") == 0) {printBinary(args[1]);}
+            else if (args[0].compareTo("test") == 0) {}
             else System.out.println("mode doesnt exist");
         }
 
@@ -29,22 +29,52 @@ public class md5{
         System.out.println(holder);
     }
 
-    public static byte[] paddingPassword(byte[] byteString) {
-        // calculating how much padding is needed and return padded bytes
-        byte[] padded = new byte[64];
-        for(int x = 0; x < byteString.length; x++){
-            padded[x] = byteString[x]; // copy original bytes into new array
+    public static byte[] paddingPassword(byte[] byteArray) throws Exception {
+        // calculating how much padding is needed and return padded bytes 
+        // I couldn't come up with a better way to do this
+        int paddedArrayLength = 0;
+        int multipleOf64 = 0; 
+
+        while (paddedArrayLength < byteArray.length) {
+            multipleOf64++;
+            paddedArrayLength = (multipleOf64 * 64); 
+            // each block still needs 64 bytes due to the last byte of the block needing the # of bytes 
         }
-        padded[byteString.length] = (byte)128; //add '10000000' byte
-        for(int x = byteString.length + 1 ; x < 63; x++){
+
+        // System.out.println("paddedArrayLength : " + paddedArrayLength);
+
+        byte[] padded = new byte[paddedArrayLength];
+        
+        for (int blocks = 0; blocks < multipleOf64; blocks++) {
+            if (blocks != multipleOf64 - 1) {
+                for (int x = 0; x < 56; x++) { // last byte is reserved for the message length
+
+
+                }
+
+            } else if (blocks == multipleOf64 - 1)  {
+
+            } else {
+                throw new Exception("");
+            }
+
+        }
+
+        for(int x = 0; x < byteArray.length; x++){
+            padded[x] = byteArray[x]; // copy original bytes into new array
+        }
+        padded[byteArray.length] = (byte)128; //add '10000000' byte
+        for(int x = byteArray.length + 1 ; x < 63; x++){
             padded[x] = 0; //pad with 0s
         }
-        padded[63] = (byte)(byteString.length*8); //last byte is # of bits
+        padded[63] = (byte)(byteArray.length*8); //last byte is # of bits
 
         //print test
         // for (int index = 0; index < padded.length; index++) {
         //     System.out.print(padded[index] + " ");
         // }
+        printByteArray(padded);
+
         return padded;
     }
 
@@ -52,7 +82,11 @@ public class md5{
         byte[] lineBytes = line.getBytes(StandardCharsets.US_ASCII);
         // reminder: still need to add if line > 63 bytes then split it up
         // for now, should only work with strings <= 63
-        byte[] padded = paddingPassword(lineBytes);
+        try {
+            byte[] padded = paddingPassword(lineBytes);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
 
     }   
