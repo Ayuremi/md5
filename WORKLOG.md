@@ -10,6 +10,12 @@ researching more on how to implement images into SSTV audio, found a few documen
 
 We decided to switch our topic to coding the md5 algorithm. I looked for a few resources and websites that explained each step of md5 and also started a skeleton for the code.
 
+### 5/24/24
+
+We worked together to start writing the code. We finished the first step of turning the string input into binary ascii and making a print function to check the code, which works. We started working on the padding step at the end of class.
+
+### 5/24/24
+I continued working on padding the input and finished the function but binary string representation shows integers padded with 1s in front which I'm not sure is okay (probably because byte is limited to -128 to 127). Added some code to the encode too. 
 
 ## Nathaniel Ciu
 

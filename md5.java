@@ -29,16 +29,33 @@ public class md5{
         System.out.println(holder);
     }
 
+    public static byte[] paddingPassword(byte[] byteString) {
+        // calculating how much padding is needed and return padded bytes
+        byte[] padded = new byte[64];
+        for(int x = 0; x < byteString.length; x++){
+            padded[x] = byteString[x]; // copy original bytes into new array
+        }
+        padded[byteString.length] = (byte)128; //add '10000000' byte
+        for(int x = byteString.length + 1 ; x < 63; x++){
+            padded[x] = 0; //pad with 0s
+        }
+        padded[63] = (byte)(byteString.length*8); //last byte is # of bits
+
+        //print test
+        // for (int index = 0; index < padded.length; index++) {
+        //     System.out.print(padded[index] + " ");
+        // }
+        return padded;
+    }
+
     public static void encode(String line){
-        
-    }
+        byte[] lineBytes = line.getBytes(StandardCharsets.US_ASCII);
+        // reminder: still need to add if line > 63 bytes then split it up
+        // for now, should only work with strings <= 63
+        byte[] padded = paddingPassword(lineBytes);
 
-    public static void paddingPassword(String line) {
-        // calculating how much padding is needed
-        
-        // 
-    }
 
+    }   
 
     public static void decode(String line) {
         
