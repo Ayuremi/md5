@@ -27,12 +27,24 @@ public class md5{
     }
 
     public static void encode(String line){
-        
+        byte[] lineBytes = line.getBytes(StandardCharsets.US_ASCII);
+
+
     }
 
-    public static void paddingPassword() {
-        // calculating how much padding is needed
+    public static byte[] paddingPassword(byte[] byteString) {
+        // calculating how much padding is needed and return padded bytes
+        byte[] padded = new byte[64];
+        for(int x = 0; x < byteString.length; x++){
+            padded[x] = byteString[x]; // copy original bytes into new array
+        }
+        padded[byteString.length] = 128; //add 10000000 bits
+        for(int x = byteString.length + 1 ; x < 63; x++){
+            padded[x] = 0; //pad with 0s
+        }
+        padded[63] = byteString.length * 8; //last byte is # of bits
 
+        return padded;
     }
 
 
