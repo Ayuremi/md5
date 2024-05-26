@@ -27,3 +27,6 @@ Switched to replicating MD5 because we couldn't find great documentation to debu
 
 ### 2024/05/24
 Coded a function with Rachel to change strings into their binary equivalent for debugging. Kinda started a padding function for step 1 of md5.
+
+### 2024/05/26
+Worked on pad function
