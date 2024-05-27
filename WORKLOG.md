@@ -17,6 +17,9 @@ We worked together to start writing the code. We finished the first step of turn
 ### 5/24/24
 I continued working on padding the input and finished the function but binary string representation shows integers padded with 1s in front which I'm not sure is okay (probably because byte is limited to -128 to 127). Added some code to the encode too. 
 
+### 5/26/24
+I realized that there was a flaw with padding and that it didn't account for inputs that were larger. I changed the function to return a 2D byte array instead and accounted for all the scenarios of sizes of inputs. The padding function works as intended and I tested it with different sizes. I also removed some code for conciseness.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
