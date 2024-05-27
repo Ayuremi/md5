@@ -29,52 +29,8 @@ public class md5 {
         System.out.println(holder);
     }
 
-    // NOTE: I (Nathaniel) did not test this (ran out of time)
     public static byte[][] paddingPassword(byte[] byteArray) throws Exception {
-        // calculating how much padding is needed and return padded bytes 
-        // I couldn't come up with a better way to do this
-        // int paddedArrayLength = 0;
-        // int multipleOf64 = 0; 
 
-        // while (paddedArrayLength < byteArray.length || paddedArrayLength == byteArray.length) {
-        //     // reason for "paddedArrayLength == byteArray.length" is that final block must have at least 1 bit of padding
-        //     multipleOf64++;
-        //     paddedArrayLength = (multipleOf64 * 64); 
-        //     // each block still needs 64 bytes due to the last byte of the block needing the # of bytes 
-        // }
-
-        // // Again could not think of a better way to do this 
-        // byte[] padded = new byte[paddedArrayLength];
-        
-        // int paddedUpTo = 0;
-        // for (int blocks = 0; blocks < multipleOf64; blocks++) {
-
-        //     if (blocks != multipleOf64 - 1) {
-        //         for (int copyTimes = 0; copyTimes < 64; copyTimes++) { 
-        //             padded[paddedUpTo] = byteArray[paddedUpTo]; //copying original bytes into new array (figure out better var names)
-        //             paddedUpTo++;
-        //         }
-
-        //     } else if (blocks == multipleOf64 - 1)  { // last block has special properties 
-        //         while (paddedUpTo < byteArray.length) {
-        //             padded[paddedUpTo] = byteArray[paddedUpTo]; //copying final original bytes into new array
-        //             paddedUpTo++;
-        //         }
-        //         padded[paddedUpTo] = (byte)128; //add '10000000' byte
-
-        //         while (paddedUpTo < padded.length - 8) { // there's 8 bytes to display message length (Nathaniel thinks)
-        //             padded[paddedUpTo] = 0; // pad with 0's
-        //         }
-
-        //         // NOTE: NEED TO ADD BYTES TO DISPLAY MESSAGE LENGTH
-
-        //     } else {
-        //         throw new Exception("Problem with the blocks during padding");
-        //     }
-        //     blocks++;
-        // }
-
-        // rachel: this is my take on finding how many 'blocks' of byte[] we need
         int multipleOf64 = byteArray.length / 64;
         int remainingBytes = byteArray.length % 64;
         long bits = byteArray.length * 8; // number of bits size of 8 bytes
@@ -122,8 +78,6 @@ public class md5 {
         //     printByteArray(arr);
         //     System.out.println("");
         // }
-
-        // return padded;
         
         return padded2D;
     }
