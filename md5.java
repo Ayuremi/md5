@@ -29,9 +29,16 @@ public class md5 {
         System.out.println(holder);
     }
 
+    public static String printBinary(byte byteLine) { // overloading 
+        //System.out.println(String.format("%8s", Integer.toBinaryString(byteLine)).replace(' ', '0') + " ");
+        return String.format("%8s", Integer.toBinaryString(byteLine)).replace(' ', '0') + " ";
+        // changed it to return for clearer debugging msgs
+    }
+
+
     public static byte[][] paddingPassword(byte[] byteArray) throws Exception {
 
-        int multipleOf64 = byteArray.length / 64;
+        int multipleOf64 = byteArray.length / 64; 
         int remainingBytes = byteArray.length % 64;
         long bits = byteArray.length * 8; // number of bits size of 8 bytes
         // NOTE: there is no failsafe for number of bits > 2^64 
@@ -58,11 +65,11 @@ public class md5 {
                 padded2D[curBlock][x] = 0; //pad with 0s
             }
         }
-        else if (remainingBytes >= 56){
-            for(int x = (byteArray.length % 64) + 1 ; x < 64; x++){ // completely fill 2nd to last block
+        else if (remainingBytes >= 56) {
+            for(int x = (byteArray.length % 64) + 1 ; x < 64; x++) { // completely fill 2nd to last block
                 padded2D[curBlock][x] = 0; //pad with 0s
-            }
-            for(int x = 0; x < 56; x++){ // completely fill 2nd to last block
+            } 
+            for(int x = 0; x < 56; x++) { // completely fill 2nd to last block
                 padded2D[curBlock + 1][x] = 0; //pad with 0s
             }
             curBlock += 1;
@@ -73,11 +80,18 @@ public class md5 {
         }
         // and done!
 
-        //print test
-        // for (byte[] arr : padded2D) {
-        //     printByteArray(arr);
-        //     System.out.println("");
-        // }
+        // print test
+        for (byte[] arr : padded2D) {
+            int index = 0;
+            for (byte element : arr) { 
+                
+                if (index < 10) System.out.println(index + ":  " + printBinary(element) );
+                else System.out.println(index + ": " + printBinary(element) );
+
+                index++;
+            }
+            System.out.println("End of block");
+        }
         
         return padded2D;
     }
