@@ -33,3 +33,6 @@ Coded a function with Rachel to change strings into their binary equivalent for 
 
 ### 2024/05/26
 Worked on pad function
+
+## 2024/05/27
+Went on what rachel (correctly) called "a wild goose chase" because I made an error on a print statement. Pain is an intimate friend. 
