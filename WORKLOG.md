@@ -20,6 +20,9 @@ I continued working on padding the input and finished the function but binary st
 ### 5/26/24
 I realized that there was a flaw with padding and that it didn't account for inputs that were larger. I changed the function to return a 2D byte array instead and accounted for all the scenarios of sizes of inputs. The padding function works as intended and I tested it with different sizes. I also removed some code for conciseness.
 
+### 5/28/24
+We worked together in class to implement spliting the 512 bit blocks into a 2D int array and solved the problem with bytes having extra padded 1s for negative numbers. 
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
