@@ -75,26 +75,53 @@ public class md5 {
             curBlock += 1;
         }
         // add message length bits to last 8 bytes
-        for (int x = 0; x < 8; x++){
+        for (int x = 0; x < 8; x++) {
             padded2D[curBlock][63-x] = (byte)(bits >> (x * 8));
+            // System.out.println(printBinary(padded2D[curBlock][63-x]));
         }
         // and done!
 
         // print test
-        for (byte[] arr : padded2D) {
-            // int index = 0;
-            // for (byte element : arr) { 
+        // for (byte[] arr : padded2D) {
+        //     // int index = 0;
+        //     // for (byte element : arr) { 
                 
-            //     if (index < 10) System.out.println(index + ":  " + printBinary(element) );
-            //     else System.out.println(index + ": " + printBinary(element) );
+        //     //     if (index < 10) System.out.println(index + ":  " + printBinary(element) );
+        //     //     else System.out.println(index + ": " + printBinary(element) );
 
-            //     index++;
-            // }
-            printByteArray(arr);
-            System.out.println("End of block");
-        }
+        //     //     index++;
+        //     // }
+        //     printByteArray(arr);
+        //     System.out.println("End of block");
+        // }
         
         return padded2D;
+    }
+
+    public static byte[][] splitIntoWords(byte[][] padded) {
+
+        // words are 32 bit but we need a work around for byte range 
+        // Here's what I came up with 
+        // String messageLenBits = String.format("%8s", Integer.toBinaryString(padded[padded.length - 1][22])).replace(' ', '0');
+        // System.out.println("In padded: " + padded[padded.length - 1][padded.length - 1]);
+        // System.out.println("Integer: " + Integer.toBinaryString(padded[padded.length - 1][22]).replace(' ', '0'));
+        // System.out.println("messageLenBits: " + messageLenBits);
+
+        // for (int x = 0; )
+        // System.out.println( Byte.toUnsignedInt(padded[padded.length - 1][63]));
+        
+        
+        
+
+
+        
+        
+        byte[][] wordList = new byte[ ((int) padded[padded.length - 1][padded.length - 1]) / 32][3];
+
+
+        // System.out.println(((int) padded[padded.length - 1][padded.length - 1]));
+
+        return wordList;
     }
 
     public static void encode(String line){
@@ -103,6 +130,9 @@ public class md5 {
         // for now, should only work with strings <= 63
         try {
             byte[][] padded = paddingPassword(lineBytes);
+
+            splitIntoWords(padded);
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -124,6 +154,26 @@ public class md5 {
 
         System.out.println(holder); 
 
+    }
+
+    public static int binaryToDecimal(String binaryString) throws Exception {
+        int decimal = 0;
+  
+        for (int len = binaryString.length() - 1; len > -1; len--) {
+            if ( (binaryString.charAt(len) + "").compareTo("1") == 0) {
+            if (len == binaryString.length() - 1) decimal += 1;
+            else if (len == binaryString.length() - 2) decimal += 2;
+            else if (len == binaryString.length() - 3) decimal += 4;
+            else if (len == binaryString.length() - 4) decimal += 8;
+            else if (len == binaryString.length() - 5) decimal += 16;
+            else if (len == binaryString.length() - 6) decimal += 32;
+            else if (len == binaryString.length() - 7) decimal += 64;
+            else if (len == binaryString.length() - 8) decimal += 128;
+            else throw new Exception("Binary String has a 1 in an unexpected place"); 
+            }
+        }
+
+        return decimal;
     }
 
 }
