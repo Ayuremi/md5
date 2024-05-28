@@ -58,7 +58,7 @@ public class md5 {
             padded2D[curBlock][x % 64] = byteArray[x]; // copy original bytes into new array
             if (x % 64 == 63) curBlock++; // move to next block after every 64 bytes
         }
-        padded2D[curBlock][byteArray.length % 64] = (byte)128; //add '10000000' byte
+        padded2D[curBlock][byteArray.length % 64] = (byte) 128; //add '10000000' byte
         // check whether to pad on last block, or last two depending on remainingBytes
         if (remainingBytes < 56){
             for(int x = (byteArray.length % 64) + 1 ; x < 56; x++){ // stop on byte 57
@@ -82,14 +82,15 @@ public class md5 {
 
         // print test
         for (byte[] arr : padded2D) {
-            int index = 0;
-            for (byte element : arr) { 
+            // int index = 0;
+            // for (byte element : arr) { 
                 
-                if (index < 10) System.out.println(index + ":  " + printBinary(element) );
-                else System.out.println(index + ": " + printBinary(element) );
+            //     if (index < 10) System.out.println(index + ":  " + printBinary(element) );
+            //     else System.out.println(index + ": " + printBinary(element) );
 
-                index++;
-            }
+            //     index++;
+            // }
+            printByteArray(arr);
             System.out.println("End of block");
         }
         
@@ -118,7 +119,7 @@ public class md5 {
         String holder = "";
 
         for (int index = 0; index < array.length; index++) {
-            holder += array[index] + ", ";
+            holder += index + ": " + array[index] + "\n";
         }
 
         System.out.println(holder); 
