@@ -36,3 +36,6 @@ Worked on pad function
 
 ### 2024/05/27
 Went on what rachel (correctly) called "a wild goose chase" because I made an error on a print statement. Pain is an intimate friend. 
+
+### 2024/05/28
+Worked on splitting the blocks into words

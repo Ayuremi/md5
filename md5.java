@@ -35,6 +35,8 @@ public class md5 {
         // changed it to return for clearer debugging msgs
     }
 
+    
+
 
     public static byte[][] paddingPassword(byte[] byteArray) throws Exception {
 
@@ -98,28 +100,33 @@ public class md5 {
         return padded2D;
     }
 
-    public static byte[][] splitIntoWords(byte[][] padded) {
+    public static int[][] splitIntoWords(byte[][] padded) {
+        
+        int[][] wordList = new int[padded.length][16]; // 16 words in 512 bit block
 
-        // words are 32 bit but we need a work around for byte range 
-        // Here's what I came up with 
-        // String messageLenBits = String.format("%8s", Integer.toBinaryString(padded[padded.length - 1][22])).replace(' ', '0');
-        // System.out.println("In padded: " + padded[padded.length - 1][padded.length - 1]);
-        // System.out.println("Integer: " + Integer.toBinaryString(padded[padded.length - 1][22]).replace(' ', '0'));
-        // System.out.println("messageLenBits: " + messageLenBits);
+        // storing as an int 
+        for (int x = 0; x < padded.length; x++) {
+            for (int y = 0; y < 64;) {
+                
+                int holder = padded[x][y];
+                for (int z = 0; z < 4; z++) {
+                    holder = holder << 8;
+                    holder = holder | (padded[x][y++] & 0xff);
+                }
+                wordList[x][y/4 - 1] = holder;
+            }
 
-        // for (int x = 0; )
-        // System.out.println( Byte.toUnsignedInt(padded[padded.length - 1][63]));
-        
-        
-        
 
-
-        
-        
-        byte[][] wordList = new byte[ ((int) padded[padded.length - 1][padded.length - 1]) / 32][3];
+        }
 
 
         // System.out.println(((int) padded[padded.length - 1][padded.length - 1]));
+        for (int[] arr: wordList) {
+            for (int integer: arr) {
+                System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
+            }
+        
+        }
 
         return wordList;
     }
@@ -131,8 +138,8 @@ public class md5 {
         try {
             byte[][] padded = paddingPassword(lineBytes);
 
-            splitIntoWords(padded);
-
+            int[][] wordList = splitIntoWords(padded);
+            
         } catch (Exception e) {
             System.out.println(e);
         }
