@@ -128,7 +128,11 @@ public class md5 {
         return wordList;
     }
 
-    public static void functionF() {
+    public static void functionF(int B, int C, int D) {
+        int firstStep = (B & C) |  (~B & D); // I think ~ is the binary NOT symbol
+        System.out.println();
+
+        // int 
 
     }
 
@@ -142,12 +146,13 @@ public class md5 {
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
 
-            // initialization vectors (keeping the same var names as website)
+            // initialization vectors (keeping the same var names as website) 
             int A = Integer.parseInt("0x01234567".substring(2), 16);
-            int B = Integer.parseInt("0x89abcdef".substring(2), 16);
-            int C = Integer.parseInt("0xfedcba98".substring(2), 16);
-            int D = Integer.parseInt("0x76543210".substring(2), 16);
+            int B = Integer.parseInt("89abcdef", 16); // problem here
+            // int C = Integer.parseInt("0xfedcba98".substring(2), 16);
+            // int D = Integer.parseInt("0x76543210".substring(2), 16);
 
+            // functionF(B, C, D);
 
 
             
