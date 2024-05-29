@@ -60,7 +60,7 @@ public class md5 {
             padded2D[curBlock][x % 64] = byteArray[x]; // copy original bytes into new array
             if (x % 64 == 63) curBlock++; // move to next block after every 64 bytes
         }
-        padded2D[curBlock][byteArray.length % 64] = (byte) 128; //add '10000000' byte
+        padded2D[curBlock][byteArray.length % 64] = (byte) 128; // add '10000000' byte (does not give '10000000' but instead '111111....000000') | Fixed in splitIntoWords
         // check whether to pad on last block, or last two depending on remainingBytes
         if (remainingBytes < 56){
             for(int x = (byteArray.length % 64) + 1 ; x < 56; x++){ // stop on byte 57
@@ -79,7 +79,7 @@ public class md5 {
         // add message length bits to last 8 bytes
         for (int x = 0; x < 8; x++) {
             padded2D[curBlock][63-x] = (byte)(bits >> (x * 8));
-            // System.out.println(printBinary(padded2D[curBlock][63-x]));
+            // may give out leading 1's | Fixed in splitIntoWords
         }
         // and done!
 
@@ -111,34 +111,45 @@ public class md5 {
                 int holder = padded[x][y];
                 for (int z = 0; z < 4; z++) {
                     holder = holder << 8;
-                    holder = holder | (padded[x][y++] & 0xff);
+                    holder = holder | (padded[x][y++] & 0xff);  // leading 1's are fixed here
+
                 }
                 wordList[x][y/4 - 1] = holder;
             }
-
-
         }
 
-
-        // System.out.println(((int) padded[padded.length - 1][padded.length - 1]));
-        for (int[] arr: wordList) {
-            for (int integer: arr) {
-                System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
-            }
-        
-        }
+        // print test
+        // for (int[] arr: wordList) {
+        //     for (int integer: arr) {
+        //         System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
+        //     }
+        // }
 
         return wordList;
     }
 
+    public static void functionF() {
+
+    }
+
     public static void encode(String line){
         byte[] lineBytes = line.getBytes(StandardCharsets.US_ASCII);
-        // reminder: still need to add if line > 63 bytes then split it up
-        // for now, should only work with strings <= 63
+    
         try {
+            // padding
             byte[][] padded = paddingPassword(lineBytes);
 
+            // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
+
+            // initialization vectors (keeping the same var names as website)
+            int A = Integer.parseInt("0x01234567".substring(2), 16);
+            int B = Integer.parseInt("0x89abcdef".substring(2), 16);
+            int C = Integer.parseInt("0xfedcba98".substring(2), 16);
+            int D = Integer.parseInt("0x76543210".substring(2), 16);
+
+
+
             
         } catch (Exception e) {
             System.out.println(e);
