@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 
 public class md5 {
@@ -129,12 +130,16 @@ public class md5 {
     }
 
     public static void functionF(int B, int C, int D) {
-        int firstStep = (B & C) |  (~B & D); // I think ~ is the binary NOT symbol
-        System.out.println();
+        
+        
+        int firstStep = (B & C) | (~B & D); 
+        // Check
+        // System.out.println(0xfedcba98 == firstStep);
 
-        // int 
-
+        
+        
     }
+
 
     public static void encode(String line){
         byte[] lineBytes = line.getBytes(StandardCharsets.US_ASCII);
@@ -147,13 +152,12 @@ public class md5 {
             int[][] wordList = splitIntoWords(padded);
 
             // initialization vectors (keeping the same var names as website) 
-            int A = Integer.parseInt("0x01234567".substring(2), 16);
-            int B = Integer.parseInt("89abcdef", 16); // problem here
-            // int C = Integer.parseInt("0xfedcba98".substring(2), 16);
-            // int D = Integer.parseInt("0x76543210".substring(2), 16);
-
-            // functionF(B, C, D);
-
+            int A = 0x01234567;
+            int B = 0x89abcdef;
+            int C = 0xfedcba98;
+            int D = 0x76543210;
+            
+            functionF(B, C, D);
 
             
         } catch (Exception e) {
