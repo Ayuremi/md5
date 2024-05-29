@@ -129,15 +129,20 @@ public class md5 {
         return wordList;
     }
 
-    public static void functionF(int B, int C, int D) {
+    public static void functionF(int[][] wordList, int block, int step, int A, int B, int C, int D) {
         
-        
-        int firstStep = (B & C) | (~B & D); 
+        int[] Mi = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+
+        int fResult = (B & C) | (~B & D); 
         // Check
         // System.out.println(0xfedcba98 == firstStep);
+        int FandA = (A + fResult) % 0b100000000;
+        // System.out.println(FandA == 0xffffffff);
+        int FAM = (FandA + wordList[block][Mi[step]]) % 0b100000000;
+        System.out.println(wordList[block][Mi[step]] == 0x54686579);
+        System.out.println(FAM == 0x54686578);
 
-        
-        
+
     }
 
 
@@ -157,8 +162,13 @@ public class md5 {
             int C = 0xfedcba98;
             int D = 0x76543210;
             
-            functionF(B, C, D);
+            functionF(wordList, 0, 0, A, B, C, D);
 
+
+            // the other Mi for other rounds 
+            // [1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12],
+            // [5,8,11,14,1,4,7,10,13,0,3,6,9,12,15,2],
+            // [0,7,14,5,12,3,10,1,8,15,6,13,4,11,2,9]];
             
         } catch (Exception e) {
             System.out.println(e);
