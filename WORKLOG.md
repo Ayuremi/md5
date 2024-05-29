@@ -42,3 +42,6 @@ Went on what rachel (correctly) called "a wild goose chase" because I made an er
 
 ### 2024/05/28
 Worked on splitting the blocks into words. Wrote initialzation factors in.
+
+### 2024/05/29
+Worked on first step on MD5 main algorithim. Went on another goose chase because of an error message from parseInt. I love java. 
