@@ -23,6 +23,9 @@ I realized that there was a flaw with padding and that it didn't account for inp
 ### 5/28/24
 We worked together in class to implement spliting the 512 bit blocks into a 2D int array and solved the problem with bytes having extra padded 1s for negative numbers. 
 
+### 5/29/24
+We worked together in class and continued making the first step of modular addition with the f function and using the words but there was an error with the addition. At home, I continued to work on the function by adding K and S steps but encountered an error.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
