@@ -129,26 +129,32 @@ public class md5 {
         return wordList;
     }
 
-    public static void functionF(int[][] wordList, int[] K, int[] S, int block, int step, int A, int B, int C, int D) {
+    public static void functionF(int[][] wordList, int[] K, int[] S, int block, int step, int[] initial) {
         
         int[] Mi = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+        // A = 0, B = 1, C = 2, D = 3
 
         // switched to long for now because adding ints can make int overflow
-        long fResult = (B & C) | (~B & D); 
+        long fResult = (initial[1] & initial[2]) | (~initial[1] & initial[3]); 
         // Check
         // System.out.println(0xfedcba98 == fResult);
-        long FandA = (A + fResult) % 0x100000000L;
+        long FandA = (initial[0] + fResult) % 0x100000000L;
         // System.out.println(FandA == 0xffffffff);
         long FAM = (FandA + wordList[block][Mi[step]]) % 0x100000000L;
-        // System.out.println(wordList[block][Mi[step]] == 0x54686579);
         // System.out.println(FAM == 0x54686578);
         long FAMK = (FAM + K[step]) % 0x100000000L;
         // System.out.println(FAMK == 0x2bd309f0);
-        int FAMKS = (int)(((FAMK << S[step]) | (FAMK >> (64 - S[step]))) & 0xFFFFFFFFL);
-        System.out.println(FAMKS);
-        System.out.println(0xe984f815);
+        int FAMKS = (int) ((FAMK << S[step]) | (FAMK >>> (32 - S[step])));
+        // System.out.println(FAMKS == 0xe984f815);
+        long FAMKSB = (FAMKS + initial[1]) % 0x100000000L;
+        // System.out.println( FAMKSB == 0x7330C604); 
+        
+        initial[0] = initial[3]; 
+        initial[3] = initial[2]; 
+        initial[2] = initial[1];
+        initial[1] = (int) FAMKSB;
 
-
+       
     }
 
 
@@ -162,11 +168,7 @@ public class md5 {
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
 
-            // initialization vectors (keeping the same var names as website) 
-            int A = 0x01234567;
-            int B = 0x89abcdef;
-            int C = 0xfedcba98;
-            int D = 0x76543210;
+            int[] initial = new int[]{0x01234567, 0x89abcdef, 0xfedcba98, 0x76543210}; // A, B, C, D
             
             // precomputed table but function is floor(232 × abs(sin(i + 1)))
             int[] K = new int[]{0xD76AA478, 0xE8C7B756, 0x242070DB, 0xC1BDCEEE,
@@ -191,7 +193,16 @@ public class md5 {
                                 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
                                 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21};
 
-            functionF(wordList, K, S, 0, 0, A, B, C, D);
+            for () {
+                for () {
+                    functionF(wordList, K, S, 0, 0, initial);
+                }
+            }
+
+            // testing
+            // for (int element: initial) {
+            //     System.out.println(element + " ");
+            // }
 
 
             // the other Mi for other rounds 
