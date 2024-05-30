@@ -133,14 +133,14 @@ public class md5 {
         
         int[] Mi = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
-        int fResult = (B & C) | (~B & D); 
+        long fResult = (B & C) | (~B & D); 
         // Check
-        // System.out.println(0xfedcba98 == firstStep);
-        int FandA = (A + fResult) % 0b100000000;
+        // System.out.println(0xfedcba98 == fResult);
+        long FandA = (A + fResult) % 0x100000000L;
         // System.out.println(FandA == 0xffffffff);
-        int FAM = (FandA + wordList[block][Mi[step]]) % 0b100000000;
-        System.out.println(wordList[block][Mi[step]] == 0x54686579);
-        System.out.println(FAM == 0x54686578);
+        long FAM = (FandA + wordList[block][Mi[step]]) % 0x100000000L;
+        // System.out.println(wordList[block][Mi[step]] == 0x54686579);
+        // System.out.println(FAM == 0x54686578);
 
 
     }
