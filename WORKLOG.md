@@ -48,3 +48,9 @@ Worked on splitting the blocks into words. Wrote initialzation factors in.
 
 ### 2024/05/29
 Worked on first step on MD5 main algorithim. Went on another goose chase because of an error message from parseInt. I love java. 
+
+### 2024/05/30
+Finished the functionF and started to move on to the next step 
+
+### 2024/05/31
+Changed how the functionF function works in order to use it for the whole md5 main alogrithm
