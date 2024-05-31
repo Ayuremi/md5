@@ -129,34 +129,58 @@ public class md5 {
         return wordList;
     }
 
-    public static void functionF(int[][] wordList, int[] K, int[] S, int block, int step, int[] initial) {
+    public static void function(int[][] wordList, int[] M, int[] K, int[] S, int block, int step, int[] initial, String functionName) {
         
-        int[] Mi = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-        // A = 0, B = 1, C = 2, D = 3
-
         // switched to long for now because adding ints can make int overflow
-        long fResult = (initial[1] & initial[2]) | (~initial[1] & initial[3]); 
-        // Check
-        // System.out.println(0xfedcba98 == fResult);
-        long FandA = (initial[0] + fResult) % 0x100000000L;
-        // System.out.println(FandA == 0xffffffff);
-        long FAM = (FandA + wordList[block][Mi[step]]) % 0x100000000L;
-        // System.out.println(FAM == 0x54686578);
-        long FAMK = (FAM + K[step]) % 0x100000000L;
-        // System.out.println(FAMK == 0x2bd309f0);
-        int FAMKS = (int) ((FAMK << S[step]) | (FAMK >>> (32 - S[step])));
-        // System.out.println(FAMKS == 0xe984f815);
-        long FAMKSB = (FAMKS + initial[1]) % 0x100000000L;
-        // System.out.println( FAMKSB == 0x7330C604); 
-        
-        initial[0] = initial[3]; 
-        initial[3] = initial[2]; 
-        initial[2] = initial[1];
-        initial[1] = (int) FAMKSB;
+        long fResult = -1;
 
-       
+        // Specfies array start pos for all arrays
+        int start = -1;
+
+        if (functionName.compareTo("F") == 0 ) {
+            fResult = (initial[1] & initial[2]) | (~initial[1] & initial[3]); 
+            start = 0;
+
+        } else if (functionName.compareTo("G") == 0 ) {
+            
+            start = 16;
+
+        } else if (functionName.compareTo("H") == 0 ) {
+            
+            start = 32;
+
+        } else if (functionName.compareTo("I") == 0 ) {
+
+            start = 48;
+        } else {
+            System.out.print("Function does not exist");
+        }
+        
+            
+            // A = 0, B = 1, C = 2, D = 3
+
+            
+            // Check
+            // System.out.println(0xfedcba98 == fResult);
+            long FandA = (initial[0] + fResult) % 0x100000000L;
+            // System.out.println(FandA == 0xffffffff);
+            long FAM = (FandA + wordList[block][M[start + step]]) % 0x100000000L;
+            // System.out.println(FAM == 0x54686578);
+            long FAMK = (FAM + K[start + step]) % 0x100000000L;
+            // System.out.println(FAMK == 0x2bd309f0);
+            int FAMKS = (int) ((FAMK << S[start + step]) | (FAMK >>> (32 - S[start + step])));
+            // System.out.println(FAMKS == 0xe984f815);
+            long FAMKSB = (FAMKS + initial[1]) % 0x100000000L;
+            // System.out.println( FAMKSB == 0x7330C604); 
+            
+            initial[0] = initial[3]; 
+            initial[3] = initial[2]; 
+            initial[2] = initial[1];
+            initial[1] = (int) FAMKSB;
+
     }
 
+   
 
     public static void encode(String line){
         byte[] lineBytes = line.getBytes(StandardCharsets.US_ASCII);
@@ -169,7 +193,13 @@ public class md5 {
             int[][] wordList = splitIntoWords(padded);
 
             int[] initial = new int[]{0x01234567, 0x89abcdef, 0xfedcba98, 0x76543210}; // A, B, C, D
-            
+
+            // Word Order
+            int[] M = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
+                                 1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12,
+                                 5,8,11,14,1,4,7,10,13,0,3,6,9,12,15,2,
+                                 0,7,14,5,12,3,10,1,8,15,6,13,4,11,2,9 };
+
             // precomputed table but function is floor(232 × abs(sin(i + 1)))
             int[] K = new int[]{0xD76AA478, 0xE8C7B756, 0x242070DB, 0xC1BDCEEE,
                                 0xF57C0FAF, 0x4787C62A, 0xA8304613, 0xFD469501,
@@ -193,11 +223,11 @@ public class md5 {
                                 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
                                 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21};
 
-            for () {
-                for () {
-                    functionF(wordList, K, S, 0, 0, initial);
-                }
-            }
+            // for (int block = 0; block < wordList.length; block++) {
+                // for (int step = 0; step < 16; step++) { // we do functionF 16 times because 
+                    function(wordList, M, K, S, 0, 0, initial, "F");
+                // }
+            // }
 
             // testing
             // for (int element: initial) {
