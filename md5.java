@@ -137,46 +137,59 @@ public class md5 {
         // Specfies array start pos for all arrays
         int start = -1;
 
+         // A = 0, B = 1, C = 2, D = 3
         if (functionName.compareTo("F") == 0 ) {
             fResult = (initial[1] & initial[2]) | (~initial[1] & initial[3]); 
             start = 0;
 
         } else if (functionName.compareTo("G") == 0 ) {
-            
+            // fResult = (B & D) | (C & ~D); 
+            fResult = (initial[1] & initial[3]) | (initial[2] & ~initial[3]); 
             start = 16;
 
         } else if (functionName.compareTo("H") == 0 ) {
-            
+            //fResult = (B ^ C ^ D) 
+            fResult = (initial[1] ^ initial[2] ^ initial[3]); 
             start = 32;
 
         } else if (functionName.compareTo("I") == 0 ) {
-
+            // (B, C, D) = C⊕(B∨¬D)
+            fResult = ( initial[3] ^ (initial[1] | initial[3]) ); 
             start = 48;
+
         } else {
             System.out.print("Function does not exist");
         }
         
-            
-            // A = 0, B = 1, C = 2, D = 3
+        // G (B, C, D) = (2c34dfa2 ∧ 4b976282)∨(de1673be ∧ ¬4b976282)
+        // fResult = (0x2c34dfa2 & 0x4b976282) | (0xde1673be & ~0x4b976282); 
 
-            
-            // Check
-            // System.out.println(0xfedcba98 == fResult);
-            long FandA = (initial[0] + fResult) % 0x100000000L;
-            // System.out.println(FandA == 0xffffffff);
-            long FAM = (FandA + wordList[block][M[start + step]]) % 0x100000000L;
-            // System.out.println(FAM == 0x54686578);
-            long FAMK = (FAM + K[start + step]) % 0x100000000L;
-            // System.out.println(FAMK == 0x2bd309f0);
-            int FAMKS = (int) ((FAMK << S[start + step]) | (FAMK >>> (32 - S[start + step])));
-            // System.out.println(FAMKS == 0xe984f815);
-            long FAMKSB = (FAMKS + initial[1]) % 0x100000000L;
-            // System.out.println( FAMKSB == 0x7330C604); 
-            
-            initial[0] = initial[3]; 
-            initial[3] = initial[2]; 
-            initial[2] = initial[1];
-            initial[1] = (int) FAMKSB;
+        
+        // Check
+        // System.out.println(0xfedcba98 == fResult);  // for F
+        // System.out.println(fResult == 0x1c1453be); // for G
+
+
+        long FandA = (initial[0] + fResult) % 0x100000000L;
+        // System.out.println(FandA == 0xffffffff);  // for F
+
+        long FAM = (FandA + wordList[block][M[start + step]]) % 0x100000000L;
+        // System.out.println(FAM == 0x54686578);  // for F
+
+        long FAMK = (FAM + K[start + step]) % 0x100000000L;
+        // System.out.println(FAMK == 0x2bd309f0);  // for F
+
+        int FAMKS = (int) ((FAMK << S[start + step]) | (FAMK >>> (32 - S[start + step])));
+        // System.out.println(FAMKS == 0xe984f815);  // for F
+
+        long FAMKSB = (FAMKS + initial[1]) % 0x100000000L;
+        // System.out.println( FAMKSB == 0x7330C604); // for F
+
+
+        initial[0] = initial[3]; 
+        initial[3] = initial[2]; 
+        initial[2] = initial[1];
+        initial[1] = (int) FAMKSB;
 
     }
 
@@ -223,12 +236,20 @@ public class md5 {
                                 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
                                 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21};
 
-            // for (int block = 0; block < wordList.length; block++) {
-                // for (int step = 0; step < 16; step++) { // we do functionF 16 times because 
-                    function(wordList, M, K, S, 0, 0, initial, "F");
-                // }
+            // System.out.println("Before");
+            // for (int element: initial) {
+            //     System.out.println(element + " ");
             // }
 
+            // for (int block = 0; block < wordList.length; block++) {
+                for (int step = 0; step < 16; step++) { // we do functionF 16 times because 
+                    function(wordList, M, K, S, 0, step, initial, "F");
+                }
+                function(wordList, M, K, S, 0, 0, initial, "G");
+
+            // }
+
+            // System.out.println("After");
             // testing
             // for (int element: initial) {
             //     System.out.println(element + " ");
