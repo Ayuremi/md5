@@ -26,6 +26,12 @@ We worked together in class to implement spliting the 512 bit blocks into a 2D i
 ### 5/29/24
 We worked together in class and continued making the first step of modular addition with the f function and using the words but there was an error with the addition. At home, I continued to work on the function by adding K and S steps but encountered an error.
 
+### 5/30/24
+We finished function f by fixing the shift step and changing ABCD to an array so that the values could be changed outside of the function.
+
+### 5/31/24
+We finished the G function but not sure if it works because the website we were following doesn't have the results. We plan to complete all the steps for just one block and check it with an online md5er or terminal.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
