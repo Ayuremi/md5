@@ -9,7 +9,7 @@ public class md5 {
         if (args.length < 1) System.out.println("no mode specified");
         else{
             if (args[0].compareTo("encode") == 0) encode(args[1]);
-            else if (args[0].compareTo("decode") == 0) decode(args[1]);
+            // else if (args[0].compareTo("decode") == 0) decode(args[1]);
             else if (args[0].compareTo("test") == 0) {}
             else System.out.println("mode doesnt exist");
         }
@@ -154,7 +154,7 @@ public class md5 {
 
         } else if (functionName.compareTo("I") == 0 ) {
             // (B, C, D) = C⊕(B∨¬D)
-            fResult = ( initial[3] ^ (initial[1] | initial[3]) ); 
+            fResult = ( initial[2] ^ (initial[1] | ~initial[3]) ); 
             start = 48;
 
         } else {
@@ -205,6 +205,7 @@ public class md5 {
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
 
+            int[] OrigInitial = new int[]{0x01234567, 0x89abcdef, 0xfedcba98, 0x76543210};
             int[] initial = new int[]{0x01234567, 0x89abcdef, 0xfedcba98, 0x76543210}; // A, B, C, D
 
             // Word Order
@@ -242,10 +243,33 @@ public class md5 {
             // }
 
             // for (int block = 0; block < wordList.length; block++) {
-                for (int step = 0; step < 16; step++) { // we do functionF 16 times because 
-                    function(wordList, M, K, S, 0, step, initial, "F");
-                }
-                function(wordList, M, K, S, 0, 0, initial, "G");
+            for (int step = 0; step < 16; step++) { // we do functionF 16 times because 
+                function(wordList, M, K, S, 0, step, initial, "F");
+            }
+            // for (int step = 0; step < 16; step++) { // we do functionF 16 times because 
+            //     function(wordList, M, K, S, 0, step, initial, "G");
+            // }
+            // for (int step = 0; step < 16; step++) { // we do functionF 16 times because 
+            //     function(wordList, M, K, S, 0, step, initial, "H");
+            // }
+            // for (int step = 0; step < 16; step++) { // we do functionF 16 times because 
+            //     function(wordList, M, K, S, 0, step, initial, "I");
+            // }
+            // for (int x = 0; x < 4; x++){
+            //     long temp = initial[x];
+            //     temp += OrigInitial[x];
+            //     temp = temp % 0x100000000L;
+            //     initial[x] = (int)temp;
+            // }
+
+            String hash = "";
+            for (int x = 0; x < 4; x++){
+                hash += String.format("%8x", initial[x]).replace(" ", "0");
+                //hash += initial[x] + " ";
+            }
+
+            //System.out.println(hash);
+            
 
             // }
 
@@ -254,23 +278,12 @@ public class md5 {
             // for (int element: initial) {
             //     System.out.println(element + " ");
             // }
-
-
-            // the other Mi for other rounds 
-            // [1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12],
-            // [5,8,11,14,1,4,7,10,13,0,3,6,9,12,15,2],
-            // [0,7,14,5,12,3,10,1,8,15,6,13,4,11,2,9]];
             
         } catch (Exception e) {
             System.out.println(e);
         }
 
-
     }   
-
-    public static void decode(String line) {
-        
-    }
 
     //helper functions 
     public static void printByteArray(byte[] array) {
