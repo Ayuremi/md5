@@ -32,6 +32,9 @@ We finished function f by fixing the shift step and changing ABCD to an array so
 ### 5/31/24
 We finished the G function but not sure if it works because the website we were following doesn't have the results. We plan to complete all the steps for just one block and check it with an online md5er or terminal.
 
+### 6/3/24
+We worked together in class to finish up the md5 function but there was an error and the md5 output is not the same from websites. We checked f and the f function should work.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
