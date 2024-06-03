@@ -20,6 +20,18 @@ I continued working on padding the input and finished the function but binary st
 ### 5/26/24
 I realized that there was a flaw with padding and that it didn't account for inputs that were larger. I changed the function to return a 2D byte array instead and accounted for all the scenarios of sizes of inputs. The padding function works as intended and I tested it with different sizes. I also removed some code for conciseness.
 
+### 5/28/24
+We worked together in class to implement spliting the 512 bit blocks into a 2D int array and solved the problem with bytes having extra padded 1s for negative numbers. 
+
+### 5/29/24
+We worked together in class and continued making the first step of modular addition with the f function and using the words but there was an error with the addition. At home, I continued to work on the function by adding K and S steps but encountered an error.
+
+### 5/30/24
+We finished function f by fixing the shift step and changing ABCD to an array so that the values could be changed outside of the function.
+
+### 5/31/24
+We finished the G function but not sure if it works because the website we were following doesn't have the results. We plan to complete all the steps for just one block and check it with an online md5er or terminal.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
@@ -39,3 +51,18 @@ Went on what rachel (correctly) called "a wild goose chase" because I made an er
 
 ### 2024/05/28
 Worked on splitting the blocks into words. Wrote initialzation factors in.
+
+### 2024/05/29
+Worked on first step on MD5 main algorithim. Went on another goose chase because of an error message from parseInt. I love java. 
+
+### 2024/05/30
+Finished the functionF and started to move on to the next step 
+
+### 2024/05/31
+Changed how the functionF function works in order to use it for the whole md5 main alogrithm
+
+### 2024/06/01 - 06/02
+No work done due to trip and was working on a different project 4 a different class.
+
+### 202/06/03
+Debugging MD5 main alogrithim b/c something went wrong 
