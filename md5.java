@@ -231,7 +231,7 @@ public class md5 {
             // }
 
             // for (int block = 0; block < wordList.length; block++) {
-            for (int step = 0; step < 64; step++) { 
+            for (int step = 0; step < 1; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
             }
             //}
