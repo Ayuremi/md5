@@ -3,8 +3,6 @@ import java.nio.charset.StandardCharsets;
 
 public class md5 {
     public static void main(String args[]){
-        // System.out.println("Main is called");
-
 
         if (args.length < 1) System.out.println("no mode specified");
         else{
@@ -13,7 +11,6 @@ public class md5 {
             else if (args[0].compareTo("test") == 0) {}
             else System.out.println("mode doesnt exist");
         }
-
 
     }
 
@@ -35,8 +32,6 @@ public class md5 {
         return String.format("%8s", Integer.toBinaryString(byteLine)).replace(' ', '0') + " ";
         // changed it to return for clearer debugging msgs
     }
-
-    
 
 
     public static byte[][] paddingPassword(byte[] byteArray) throws Exception {
@@ -77,6 +72,7 @@ public class md5 {
             }
             curBlock += 1;
         }
+
         // add message length bits to last 8 bytes
         for (int x = 0; x < 8; x++) {
             padded2D[curBlock][63-x] = (byte)(bits >> (x * 8));
@@ -136,7 +132,7 @@ public class md5 {
         // Check
         // System.out.println(0xfedcba98 == firstStep);
 
-        
+
         
     }
 
