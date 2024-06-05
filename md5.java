@@ -7,7 +7,7 @@ public class md5 {
         if (args.length < 1) System.out.println("no mode specified");
         else{
             if (args[0].compareTo("encode") == 0) encode(args[1]);
-            else if (args[0].compareTo("decode") == 0) decode(args[1]);
+            // else if (args[0].compareTo("decode") == 0) decode(args[1]);
             else if (args[0].compareTo("test") == 0) {}
             else System.out.println("mode doesnt exist");
         }
@@ -125,17 +125,60 @@ public class md5 {
         return wordList;
     }
 
-    public static void functionF(int B, int C, int D) {
+    public static void function(int[][] wordList, int[] M, int[] K, int[] S, int block, int step, int[] initial) {
         
+        int fResult = -1;
+
+         // A = 0, B = 1, C = 2, D = 3
+        if (step < 16) { // F
+            // correct 
+            fResult = (initial[1] & initial[2]) | (~initial[1] & initial[3]); 
+        } else if (step < 32) { // G
+            // fResult = (B & D) | (C & ~D); 
+            fResult = (initial[1] & initial[3]) | (initial[2] & ~initial[3]); 
+        } else if (step < 48) { // H
+            //fResult = (B ^ C ^ D) 
+            fResult = (initial[1] ^ initial[2] ^ initial[3]); 
+        } else if (step < 64) { // I
+            // (B, C, D) = C⊕(B∨¬D)
+            fResult = ( initial[2] ^ (initial[1] | ~initial[3]) ); 
+        } else {
+            System.out.print("Function does not exist");
+        }
         
-        int firstStep = (B & C) | (~B & D); 
+        // G (B, C, D) = (2c34dfa2 ∧ 4b976282)∨(de1673be ∧ ¬4b976282)
+        // fResult = (0x2c34dfa2 & 0x4b976282) | (0xde1673be & ~0x4b976282); 
+
+        
         // Check
-        // System.out.println(0xfedcba98 == firstStep);
+        // System.out.println(0xfedcba98 == fResult);  // for F
+        // System.out.println(fResult == 0x1c1453be); // for G
+
+        // switched to long for now because adding ints can make int overflow
+        long FandA = ((initial[0] & 0xFFFFFFFFL) + (fResult & 0xFFFFFFFFL)) % 0x100000000L;
+        // System.out.println(FandA == 0xffffffff);  // for F
+
+        long FAM = (FandA + (wordList[block][M[step]] & 0xFFFFFFFFL)) % 0x100000000L;
+        // System.out.println(FAM == 0x54686578);  // for F
+
+        long FAMK = (FAM + (K[step] & 0xFFFFFFFFL)) % 0x100000000L;
+        // System.out.println(FAMK == 0x2bd309f0);  // for F
+
+        long FAMKS = (FAMK << S[step]) | (FAMK >>> (32 - S[step]));
+        // System.out.println(FAMKS == 0xe984f815);  // for F
+
+        long FAMKSB = (FAMKS + (initial[1] & 0xFFFFFFFFL)) % 0x100000000L;
+        // System.out.println( FAMKSB == 0x7330C604); // for F
 
 
-        
+        initial[0] = initial[3]; 
+        initial[3] = initial[2]; 
+        initial[2] = initial[1];
+        initial[1] = (int) FAMKSB;
+
     }
 
+   
 
     public static void encode(String line){
         byte[] lineBytes = line.getBytes(StandardCharsets.US_ASCII);
@@ -147,25 +190,81 @@ public class md5 {
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
 
-            // initialization vectors (keeping the same var names as website) 
-            int A = 0x01234567;
-            int B = 0x89abcdef;
-            int C = 0xfedcba98;
-            int D = 0x76543210;
-            
-            functionF(B, C, D);
+            int[] OrigInitial = new int[]{0x01234567, 0x89abcdef, 0xfedcba98, 0x76543210};
+            int[] initial = new int[]{0x01234567, 0x89abcdef, 0xfedcba98, 0x76543210}; // A, B, C, D
 
+            // Word Order
+            int[] M = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
+                                 1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12,
+                                 5,8,11,14,1,4,7,10,13,0,3,6,9,12,15,2,
+                                 0,7,14,5,12,3,10,1,8,15,6,13,4,11,2,9 };
+
+            // precomputed table but function is floor(232 × abs(sin(i + 1)))
+            int[] K = new int[]{0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
+                                0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
+                                0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
+                                0x6b901122, 0xfd987193, 0xa679438e, 0x49b40821,
+                                0xf61e2562, 0xc040b340, 0x265e5a51, 0xe9b6c7aa,
+                                0xd62f105d, 0x02441453, 0xd8a1e681, 0xe7d3fbc8,
+                                0x21e1cde6, 0xc33707d6, 0xf4d50d87, 0x455a14ed,
+                                0xa9e3e905, 0xfcefa3f8, 0x676f02d9, 0x8d2a4c8a,
+                                0xfffa3942, 0x8771f681, 0x6d9d6122, 0xfde5380c,
+                                0xa4beea44, 0x4bdecfa9, 0xf6bb4b60, 0xbebfbc70,
+                                0x289b7ec6, 0xeaa127fa, 0xd4ef3085, 0x04881d05,
+                                0xd9d4d039, 0xe6db99e5, 0x1fa27cf8, 0xc4ac5665,
+                                0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039,
+                                0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
+                                0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
+                                0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391};
+            
+            int[] S = new int[]{7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
+                                5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,
+                                4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
+                                6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21};
+
+            // System.out.println("Before");
+            // for (int element: initial) {
+            //     System.out.println(element + " ");
+            // }
+
+            // for (int block = 0; block < wordList.length; block++) {
+            for (int step = 0; step < 64; step++) { 
+                function(wordList, M, K, S, 0, step, initial);
+            }
+            //}
+            for (int x = 0; x < 4; x++){
+                long temp = initial[x] & 0xFFFFFFFFL;
+                temp += OrigInitial[x] & 0xFFFFFFFFL;
+                temp = temp % 0x100000000L;
+                initial[x] = (int)temp;
+            }
+            
+            // int[] temp = new int[]{0x799d1352,0x2c34dfa2,0xde1673be,0x4b976282};
+            // int etargdhf = (temp[1] & temp[3]) | (temp[2] & ~temp[3]); 
+            
+            String hash = "";
+            for (int x = 0; x < 4; x++){
+                hash += String.format("%8x", initial[x]).replace(" ", "0") + " ";
+                //hash += Integer.toBinaryString(initial[x]).replace(" ", "0") + " ";
+                //hash += initial[x] + " ";
+            }
+
+            //System.out.println(String.format("%8x",etargdhf).replace(" ", "0"));
+            System.out.println(hash);
+            
+            // }
+
+            // System.out.println("After");
+            // testing
+            // for (int element: initial) {
+            //     System.out.println(element + " ");
+            // }
             
         } catch (Exception e) {
             System.out.println(e);
         }
 
-
     }   
-
-    public static void decode(String line) {
-        
-    }
 
     //helper functions 
     public static void printByteArray(byte[] array) {
