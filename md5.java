@@ -33,6 +33,10 @@ public class md5 {
         // changed it to return for clearer debugging msgs
     }
 
+    public static String printhex(long value) {
+        return String.format("%8x", value).replace(' ', '0') + " ";
+    }
+
 
     public static byte[][] paddingPassword(byte[] byteArray) throws Exception {
 
@@ -131,14 +135,16 @@ public class md5 {
 
          // A = 0, B = 1, C = 2, D = 3
         if (step < 16) { // F
-            
+            // fResult = 
             fResult = (initial[1] & initial[2]) | (~initial[1] & initial[3]); 
+
+            // System.out.println(0xfedcba98 == fResult);  // for F
             // correct 
 
         } else if (step < 32) { // G
             // fResult = (B & D) | (C & ~D); 
             fResult = (initial[1] & initial[3]) | (initial[2] & ~initial[3]); 
-            
+
         } else if (step < 48) { // H
             //fResult = (B ^ C ^ D) 
             fResult = (initial[1] ^ initial[2] ^ initial[3]); 
@@ -154,24 +160,27 @@ public class md5 {
 
         
         // Check
-        // System.out.println(0xfedcba98 == fResult);  // for F
+        System.out.println(0xfedcba98 == fResult);  // for F
+        System.out.println(printhex(fResult));
         // System.out.println(fResult == 0x1c1453be); // for G
 
         // switched to long for now because adding ints can make int overflow
-        long FandA = ((initial[0]) + (fResult)) % 0x100000000L; // & 0xFFFFFFFFL
-        // System.out.println(FandA == 0xffffffff);  // for F
+        long FandA = ((initial[0]) + (fResult)) % 0x100000000L; 
+        System.out.println(FandA == 0xffffffff);  // for F
 
         long FAM = (FandA + (wordList[block][M[step]])) % 0x100000000L;
-        // System.out.println(FAM == 0x54686578);  // for F
+        System.out.println(FAM == 0x54686578);  // for F
 
         long FAMK = (FAM + (K[step])) % 0x100000000L;
-        // System.out.println(FAMK == 0x2bd309f0);  // for F
+        System.out.println(FAMK == 0x2bd309f0);  // for F
 
         long FAMKS = (FAMK << S[step]) | (FAMK >>> (32 - S[step]));
-        // System.out.println(FAMKS == 0xe984f815);  // for F
+        System.out.println(FAMKS == 0xe984f815);  // for F
 
         long FAMKSB = (FAMKS + (initial[1])) % 0x100000000L;
         System.out.println( FAMKSB == 0x04C63073); // for F // 0x7330C604
+                                    //  cfcdeecf
+                                    // bb3a5b2e02
 
 
         initial[0] = initial[3]; 
@@ -208,6 +217,8 @@ public class md5 {
             for (int index = 0; index < 64; index++) { 
                 K[index] = (int)(long)( (1L << 32) * Math.abs(Math.sin(index + 1)) );
             }
+
+
             // int[] K = new int[]{0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
             //                     0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501, 
             //                     0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
@@ -230,16 +241,24 @@ public class md5 {
                                 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
                                 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21};
 
+                                // Reference from python code
+                                // [7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+                                // 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20,
+                                // 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
+                                // 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21]
+              
+
             // System.out.println("Before");
             // for (int element: initial) {
             //     System.out.println(element + " ");
             // }
 
             // for (int block = 0; block < wordList.length; block++) {
-            for (int step = 0; step < 64; step++) { 
+            for (int step = 0; step < 1; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
             }
             //}
+            
             for (int x = 0; x < 4; x++){
                 long temp = initial[x];
                 temp += OrigInitial[x];

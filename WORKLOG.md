@@ -67,5 +67,8 @@ Changed how the functionF function works in order to use it for the whole md5 ma
 ### 2024/06/01 - 06/02
 No work done due to trip and was working on a different project 4 a different class.
 
-### 202/06/03
+### 2024/06/03
 Debugging MD5 main alogrithim b/c something went wrong 
+
+### 2024/06/05
+Continuing to try and fix our md5 problem
