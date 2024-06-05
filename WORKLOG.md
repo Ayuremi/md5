@@ -35,6 +35,9 @@ We finished the G function but not sure if it works because the website we were 
 ### 6/3/24
 We worked together in class to finish up the md5 function but there was an error and the md5 output is not the same from websites. We checked f and the f function should work.
 
+### 6/5/24
+We worked together to try and figure out what is wrong with our md5 function. We went back to looking for other websites that have the intermediary values of the md5. We changed K to be computed through a formula instead.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
