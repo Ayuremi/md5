@@ -160,25 +160,35 @@ public class md5 {
 
         
         // Check
-        System.out.println(0xfedcba98 == fResult);  // for F
+        System.out.println(0x98badcfe == fResult);  // for F 0xfedcba98
+        
         System.out.println(printhex(fResult));
         // System.out.println(fResult == 0x1c1453be); // for G
 
         // switched to long for now because adding ints can make int overflow
         long FandA = ((initial[0]) + (fResult)) % 0x100000000L; 
+        System.out.println("\nFandA");
         System.out.println(FandA == 0xffffffff);  // for F
 
         long FAM = (FandA + (wordList[block][M[step]])) % 0x100000000L;
+        System.out.println("\nFAM");
         System.out.println(FAM == 0x54686578);  // for F
 
         long FAMK = (FAM + (K[step])) % 0x100000000L;
+        System.out.println("\nFAMK");
         System.out.println(FAMK == 0x2bd309f0);  // for F
 
         long FAMKS = (FAMK << S[step]) | (FAMK >>> (32 - S[step]));
+        System.out.println("\nFAMKS");
         System.out.println(FAMKS == 0xe984f815);  // for F
 
         long FAMKSB = (FAMKS + (initial[1])) % 0x100000000L;
+        System.out.println("\nFAMKSB");
+        System.out.println(FAMKSB == 0x7330C604);
         System.out.println( FAMKSB == 0x04C63073); // for F // 0x7330C604
+        System.out.println();
+        
+        printBinary((Integer.toBinaryString((int) FAMKSB)));
                                     //  cfcdeecf
                                     // bb3a5b2e02
 
