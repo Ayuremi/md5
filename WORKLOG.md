@@ -72,3 +72,6 @@ Debugging MD5 main alogrithim b/c something went wrong
 
 ### 2024/06/05
 Continuing to try and fix our md5 problem
+
+### 2024/06/06
+Figured out what was going on in our python reference and will now use it to debug our md5 replicator.
