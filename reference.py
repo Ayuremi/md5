@@ -66,7 +66,7 @@ def md5(message):
             # new_b should = FAMKSB
 
             print("FAMKS")
-            print(left_rotate(to_rotate, rotate_amounts[i]))
+            print(md5_to_hex(left_rotate(to_rotate, rotate_amounts[i])))
 
             print("FAMKSB")
             print(md5_to_hex(new_b))
