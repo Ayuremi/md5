@@ -141,6 +141,7 @@ public class md5 {
         if (step < 16) { // F
             // fResult = (B and C) or ((not B) and D)
             fResult = (initial[1] & initial[2]) | (~initial[1] & initial[3]); 
+            // f = (b & c) | (~b & d);
 
             // System.out.println(0xfedcba98 == fResult);  // for F
             // correct 
@@ -148,10 +149,13 @@ public class md5 {
         } else if (step < 32) { // G
             // fResult = (B & D) | (C & ~D); 
             fResult = (initial[1] & initial[3]) | (initial[2] & ~initial[3]); 
+            // f = (b & d) | (c & ~d);
 
         } else if (step < 48) { // H
             //fResult = (B ^ C ^ D) 
             fResult = (initial[1] ^ initial[2] ^ initial[3]); 
+            
+
         } else if (step < 64) { // I
             // (B, C, D) = C⊕(B∨¬D)
             fResult = ( initial[2] ^ (initial[1] | ~initial[3]) ); 
@@ -182,12 +186,15 @@ public class md5 {
 
         long FAMK = (FAM + (K[step])) % 0x100000000L;
         System.out.println("\nFAMK");
-        System.out.println(FAMK == 0x2bd309f0);  // for F
+        // System.out.println(FAMK == 0x2bd309f0);  // for F
         System.out.println(printhex(FAMK));
+        // 250d00ccb
 
-        long FAMKS = (FAMK << S[step]) | (FAMK >>> (32 - S[step]));
+
+        long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) ) & 0xFFFFFFFF ;
+        System.out.println("rotate_amount: " + S[step]);
         System.out.println("\nFAMKS");
-        System.out.println((int) FAMKS == 0xe984f815);  // for f | works if it's casted into an int
+        // System.out.println((int) FAMKS == 0xe984f815);  // for f | works if it's casted into an int
         System.out.println(printhex( (int) FAMKS));
 
         long FAMKSB = (FAMKS + (initial[1])) % 0x100000000L;
@@ -195,12 +202,14 @@ public class md5 {
         System.out.println(FAMKSB == 0x7330C604);
         System.out.println( FAMKSB == 0x04C63073); // for F // 0x7330C604
         System.out.println(printhex(FAMKSB));
+        // 57d41131
 
         System.out.println();
         
         printBinary((Integer.toBinaryString((int) FAMKSB)));
                                     //  cfcdeecf
                                     // bb3a5b2e02
+                                    // 57d41131
 
 
         initial[0] = initial[3]; 
