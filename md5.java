@@ -181,12 +181,12 @@ public class md5 {
 
         long FAM = (FandA + (wordList[block][M[step]])) % 0x100000000L;
         System.out.println("\nFAM");
-        System.out.println(FAM == 0x54686578);  // for F
+        System.out.println(FAM == 0x179656853L); // for F 
         System.out.println(printhex(FAM));
 
         long FAMK = (FAM + (K[step])) % 0x100000000L;
         System.out.println("\nFAMK");
-        // System.out.println(FAMK == 0x2bd309f0);  // for F
+        System.out.println(FAMK == 0x250d00ccbL);  // for F 
         System.out.println(printhex(FAMK));
         // 250d00ccb
 
@@ -194,13 +194,12 @@ public class md5 {
         long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) ) & 0xFFFFFFFF ;
         System.out.println("rotate_amount: " + S[step]);
         System.out.println("\nFAMKS");
-        // System.out.println((int) FAMKS == 0xe984f815);  // for f | works if it's casted into an int
-        System.out.println(printhex( (int) FAMKS));
+        System.out.println(FAMKS == 0x680665a8);  // for f | works if it's casted into an int
+        // System.out.println(printhex( (int) FAMKS));
 
         long FAMKSB = (FAMKS + (initial[1])) % 0x100000000L;
         System.out.println("\nFAMKSB");
-        System.out.println(FAMKSB == 0x7330C604);
-        System.out.println( FAMKSB == 0x04C63073); // for F // 0x7330C604
+        System.out.println( FAMKSB == 0x57d41131); // for F // 0x7330C604
         System.out.println(printhex(FAMKSB));
         // 57d41131
 
