@@ -6,7 +6,11 @@ public class md5 {
 
         if (args.length < 1) System.out.println("no mode specified");
         else{
-            if (args[0].compareTo("encode") == 0) encode(args[1]);
+            if (args[0].compareTo("encode") == 0){
+                if (args.length == 1) encode("");
+                else encode(args[1]);
+            }
+            
             // else if (args[0].compareTo("decode") == 0) decode(args[1]);
             else if (args[0].compareTo("test") == 0) {}
             else System.out.println("mode doesnt exist");
@@ -175,46 +179,52 @@ public class md5 {
 
         // switched to long for now because adding ints can make int overflow
         long FandA = ((initial[0]) + (fResult)) % 0x100000000L; 
-        System.out.println("\nFandA");
-        System.out.println(FandA == 0xffffffff);  // for F
-        System.out.println(printhex(FandA));
+        // System.out.println("\nFandA");
+        // System.out.println((int)FandA == 0xffffffff);  // for F
+        // System.out.println(printhex(FandA));
+        // System.out.println(Long.toHexString(FandA));
 
-        long FAM = (FandA + (wordList[block][M[step]])) % 0x100000000L;
-        System.out.println("\nFAM");
-        System.out.println(FAM == 0x179656853L); // for F 
-        System.out.println(printhex(FAM));
+        long FAM = ((FandA + (wordList[block][M[step]])) % 0x100000000L) & 0xFFFFFFFFL;
+        // System.out.println("\nFAM");
+        // System.out.println("\n" + Integer.toHexString(wordList[block][M[step]]));
+        // System.out.println(FAM == 0x179656853L); // for F , rachel: got 54686578 from online calculator?
+        // System.out.println(printhex(FAM));
+        // System.out.println(Long.toHexString(FAM));
 
-        long FAMK = (FAM + (K[step])) % 0x100000000L;
-        System.out.println("\nFAMK");
-        System.out.println(FAMK == 0x250d00ccbL);  // for F 
-        System.out.println(printhex(FAMK));
+        long FAMK = ((FAM + (K[step])) % 0x100000000L) & 0xFFFFFFFFL;
+        // System.out.println("\nFAMK");
+        // System.out.println("\n" + Integer.toHexString(K[step]));
+        // System.out.println(FAMK == 0x250d00ccbL);  // for F, rachel: got 2BD309F0
+        // System.out.println(printhex(FAMK));
         // 250d00ccb
 
 
-        long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) ) & 0xFFFFFFFF ;
-        System.out.println("rotate_amount: " + S[step]);
-        System.out.println("\nFAMKS");
-        System.out.println(FAMKS == 0x680665a8);  // for f | works if it's casted into an int
-        // System.out.println(printhex( (int) FAMKS));
+        long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) ) & 0xFFFFFFFFL ;
+        // System.out.println("rotate_amount: " + S[step]);
+        // System.out.println("\nFAMKS");
+        // System.out.println(FAMKS == 0x680665a8);  // for f | works if it's casted into an int
+        //                                           // rachel: got E984F815
+        // System.out.println(printhex(FAMKS));
 
-        long FAMKSB = (FAMKS + (initial[1])) % 0x100000000L;
-        System.out.println("\nFAMKSB");
-        System.out.println( FAMKSB == 0x57d41131); // for F // 0x7330C604
-        System.out.println(printhex(FAMKSB));
+        long FAMKSB = ((FAMKS + (initial[1])) % 0x100000000L ) & 0xFFFFFFFFL;
+        // System.out.println("\nFAMKSB");
+        // System.out.println("\n" + Integer.toHexString(initial[1]));
+        // System.out.println( FAMKSB == 0x57d41131); // for F // 0x7330C604 // rachel: got D952A39E
+        // System.out.println(printhex(FAMKSB));
         // 57d41131
 
-        System.out.println();
-        
-        printBinary((Integer.toBinaryString((int) FAMKSB)));
+        System.out.println(Integer.toHexString((int)FAMKSB));
                                     //  cfcdeecf
                                     // bb3a5b2e02
                                     // 57d41131
-
+        
+        int test = initial[1] + Integer.rotateLeft(initial[0] + fResult + wordList[block][M[step]] + K[step], S[step]);
+        // actually gives the same thing i think??? which is kind of stupid that we did all that work lmao
 
         initial[0] = initial[3]; 
         initial[3] = initial[2]; 
         initial[2] = initial[1];
-        initial[1] = (int) FAMKSB;
+        initial[1] = (int)FAMKSB;
 
     }
 
@@ -237,8 +247,8 @@ public class md5 {
                 }
             }
 
-            int[] OrigInitial = new int[]{0x67452301, (int)0xefcdab89, (int)0x98badcfe, 0x10325476};
-            int[] initial = new int[]{0x67452301, (int)0xefcdab89, (int)0x98badcfe, 0x10325476}; // A, B, C, D
+            int[] OrigInitial = new int[]{0x67452301, (int)0xefcdab89L, (int)0x98badcfeL, 0x10325476};
+            //for (int x = 0; x < 4; x++) System.out.println(x + ": " + Integer.toHexString(OrigInitial[x]));
             
             // Word Order
             int[] M = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
@@ -293,26 +303,26 @@ public class md5 {
             // for (int element: initial) {
             //     System.out.println(element + " ");
             // }
-
+            
+            int[] initial = new int[4];
             // for (int block = 0; block < wordList.length; block++) {
-            for (int step = 0; step < 1; step++) { 
+            initial = OrigInitial.clone();
+            for (int step = 0; step < 2; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
             }
             //}
             
-            for (int x = 0; x < 4; x++){
-                long temp = initial[x];
-                temp += OrigInitial[x];
-                temp = temp % 0x100000000L;
-                initial[x] = (int)temp;
-            }
+            // for (int x = 0; x < 4; x++){
+            //     long temp = (((long)initial[x] + (long)OrigInitial[x] )% 0x100000000L)& 0xFFFFFFFFL;
+            //     OrigInitial[x] = (int)temp;
+            // }
             
             // int[] temp = new int[]{0x799d1352,0x2c34dfa2,0xde1673be,0x4b976282};
             // int etargdhf = (temp[1] & temp[3]) | (temp[2] & ~temp[3]); 
             
             String hash = "";
             for (int x = 0; x < 4; x++){
-                hash += String.format("%8x", initial[x]).replace(" ", "0") + " ";
+                hash += Integer.toHexString(initial[x]) + " "; //should be originitial btw
                 //hash += Integer.toBinaryString(initial[x]).replace(" ", "0") + " ";
                 //hash += initial[x] + " ";
             }
