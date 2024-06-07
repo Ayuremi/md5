@@ -33,6 +33,14 @@ public class md5 {
         // changed it to return for clearer debugging msgs
     }
 
+    public static String printhex(long value) {
+        return String.format("%8x", value).replace(' ', '0') + " ";
+    }
+
+    public static String printhex(int value) {
+        return String.format("%8x", value).replace(' ', '0') + " ";
+    }
+
 
     public static byte[][] paddingPassword(byte[] byteArray) throws Exception {
 
@@ -116,11 +124,11 @@ public class md5 {
         }
 
         // print test
-        // for (int[] arr: wordList) {
-        //     for (int integer: arr) {
-        //         System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
-        //     }
-        // }
+        for (int[] arr: wordList) {
+            for (int integer: arr) {
+                System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
+            }
+        }
 
         return wordList;
     }
@@ -131,17 +139,23 @@ public class md5 {
 
          // A = 0, B = 1, C = 2, D = 3
         if (step < 16) { // F
-            
+            // fResult = (B and C) or ((not B) and D)
             fResult = (initial[1] & initial[2]) | (~initial[1] & initial[3]); 
+            // f = (b & c) | (~b & d);
+
+            // System.out.println(0xfedcba98 == fResult);  // for F
             // correct 
 
         } else if (step < 32) { // G
             // fResult = (B & D) | (C & ~D); 
             fResult = (initial[1] & initial[3]) | (initial[2] & ~initial[3]); 
-            
+            // f = (b & d) | (c & ~d);
+
         } else if (step < 48) { // H
             //fResult = (B ^ C ^ D) 
             fResult = (initial[1] ^ initial[2] ^ initial[3]); 
+            
+
         } else if (step < 64) { // I
             // (B, C, D) = C⊕(B∨¬D)
             fResult = ( initial[2] ^ (initial[1] | ~initial[3]) ); 
@@ -154,24 +168,47 @@ public class md5 {
 
         
         // Check
-        // System.out.println(0xfedcba98 == fResult);  // for F
+        System.out.println(0x98badcfe == fResult);  // for F 0xfedcba98
+        
+        System.out.println(printhex(fResult));
         // System.out.println(fResult == 0x1c1453be); // for G
 
         // switched to long for now because adding ints can make int overflow
-        long FandA = ((initial[0]) + (fResult)) % 0x100000000L; // & 0xFFFFFFFFL
-        // System.out.println(FandA == 0xffffffff);  // for F
+        long FandA = ((initial[0]) + (fResult)) % 0x100000000L; 
+        System.out.println("\nFandA");
+        System.out.println(FandA == 0xffffffff);  // for F
+        System.out.println(printhex(FandA));
 
         long FAM = (FandA + (wordList[block][M[step]])) % 0x100000000L;
-        // System.out.println(FAM == 0x54686578);  // for F
+        System.out.println("\nFAM");
+        System.out.println(FAM == 0x179656853L); // for F 
+        System.out.println(printhex(FAM));
 
         long FAMK = (FAM + (K[step])) % 0x100000000L;
-        // System.out.println(FAMK == 0x2bd309f0);  // for F
+        System.out.println("\nFAMK");
+        System.out.println(FAMK == 0x250d00ccbL);  // for F 
+        System.out.println(printhex(FAMK));
+        // 250d00ccb
 
-        long FAMKS = (FAMK << S[step]) | (FAMK >>> (32 - S[step]));
-        // System.out.println(FAMKS == 0xe984f815);  // for F
+
+        long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) ) & 0xFFFFFFFF ;
+        System.out.println("rotate_amount: " + S[step]);
+        System.out.println("\nFAMKS");
+        System.out.println(FAMKS == 0x680665a8);  // for f | works if it's casted into an int
+        // System.out.println(printhex( (int) FAMKS));
 
         long FAMKSB = (FAMKS + (initial[1])) % 0x100000000L;
-        System.out.println( FAMKSB == 0x04C63073); // for F // 0x7330C604
+        System.out.println("\nFAMKSB");
+        System.out.println( FAMKSB == 0x57d41131); // for F // 0x7330C604
+        System.out.println(printhex(FAMKSB));
+        // 57d41131
+
+        System.out.println();
+        
+        printBinary((Integer.toBinaryString((int) FAMKSB)));
+                                    //  cfcdeecf
+                                    // bb3a5b2e02
+                                    // 57d41131
 
 
         initial[0] = initial[3]; 
@@ -193,14 +230,24 @@ public class md5 {
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
 
-            int[] OrigInitial = new int[]{0x67452301, (int)0xEFCDAB89L, (int)0x98BADCFEL, 0x10325476};
-            int[] initial = new int[]{0x67452301, (int)0xEFCDAB89L, (int)0x98BADCFEL, 0x10325476}; // A, B, C, D
+            //printing out wordList
+            for (int[] arrays: wordList) {
+                for (int elements: arrays) {
+                    System.out.println(String.format("%32s", Integer.toBinaryString(elements)).replace(' ', '0') + " ");
+                }
+            }
 
+            int[] OrigInitial = new int[]{0x67452301, (int)0xefcdab89, (int)0x98badcfe, 0x10325476};
+            int[] initial = new int[]{0x67452301, (int)0xefcdab89, (int)0x98badcfe, 0x10325476}; // A, B, C, D
+            
             // Word Order
             int[] M = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
                                 1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12,
                                 5,8,11,14,1,4,7,10,13,0,3,6,9,12,15,2,
                                 0,7,14,5,12,3,10,1,8,15,6,13,4,11,2,9 };
+
+            // word order 
+
 
             // precomputed table but function is floor(232 × abs(sin(i + 1)))
             int[] K = new int[64];
@@ -208,6 +255,11 @@ public class md5 {
             for (int index = 0; index < 64; index++) { 
                 K[index] = (int)(long)( (1L << 32) * Math.abs(Math.sin(index + 1)) );
             }
+
+            printIntArray(K);
+
+
+
             // int[] K = new int[]{0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
             //                     0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501, 
             //                     0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
@@ -230,16 +282,24 @@ public class md5 {
                                 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
                                 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21};
 
+                                // Reference from python code
+                                // [7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+                                // 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20,
+                                // 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
+                                // 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21]
+              
+
             // System.out.println("Before");
             // for (int element: initial) {
             //     System.out.println(element + " ");
             // }
 
             // for (int block = 0; block < wordList.length; block++) {
-            for (int step = 0; step < 64; step++) { 
+            for (int step = 0; step < 1; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
             }
             //}
+            
             for (int x = 0; x < 4; x++){
                 long temp = initial[x];
                 temp += OrigInitial[x];
@@ -280,6 +340,17 @@ public class md5 {
 
         for (int index = 0; index < array.length; index++) {
             holder += index + ": " + array[index] + "\n";
+        }
+
+        System.out.println(holder); 
+
+    }
+
+    public static void printIntArray(int[] array) {
+        String holder = "";
+
+        for (int index = 0; index < array.length; index++) {
+            holder += index + ": " + printhex(array[index]) + "\n";
         }
 
         System.out.println(holder); 
