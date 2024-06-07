@@ -41,6 +41,9 @@ We worked together to try and figure out what is wrong with our md5 function. We
 ### 6/6/24
 I tried to find out what was going wrong with the code but was unsuccessful. I used online calculators to manually calculate values but they gave different answers than the python program so I'm really confused now. Fixed some code in some areas with misconceptions.
 
+### 6/7/24
+We worked together in class to find out what was wrong with the code. I used the python and java implementations to compare our answers and we found out that our words were being stored in the wrong endianess which led to the wrong answers when performing modular addition on that step. Will work more on this to fix it because it broke again at the shifting.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
