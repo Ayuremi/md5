@@ -54,6 +54,8 @@ def md5(message):
 
             print("FAM")
             print(md5_to_hex(a + f + int.from_bytes(chunk[4*g:4*g+4], byteorder='little'))) 
+            print("Actually word")
+            print(md5_to_hex(int.from_bytes(chunk[4*g:4*g+4], byteorder='little')))
             
             print("FAMK")
             print(md5_to_hex(to_rotate)) # should = FAMK

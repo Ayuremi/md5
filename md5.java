@@ -180,6 +180,10 @@ public class md5 {
         System.out.println(printhex(FandA));
 
         long FAM = (FandA + (wordList[block][M[step]])) % 0x100000000L;
+        System.out.println("M[Step] : " + M[step]);
+        System.out.println("Block : " + block);
+        System.out.println("wordList: " + String.format("%8x",  wordList[block][M[step]]).replace(' ', '0') + " ");
+        // System.out.println(M[step]);
         System.out.println("\nFAM");
         System.out.println(FAM == 0x179656853L); // for F 
         System.out.println(printhex(FAM));
@@ -189,7 +193,6 @@ public class md5 {
         System.out.println(FAMK == 0x250d00ccbL);  // for F 
         System.out.println(printhex(FAMK));
         // 250d00ccb
-
 
         long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) ) & 0xFFFFFFFF ;
         System.out.println("rotate_amount: " + S[step]);
@@ -230,13 +233,6 @@ public class md5 {
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
 
-            //printing out wordList
-            for (int[] arrays: wordList) {
-                for (int elements: arrays) {
-                    System.out.println(String.format("%32s", Integer.toBinaryString(elements)).replace(' ', '0') + " ");
-                }
-            }
-
             int[] OrigInitial = new int[]{0x67452301, (int)0xefcdab89, (int)0x98badcfe, 0x10325476};
             int[] initial = new int[]{0x67452301, (int)0xefcdab89, (int)0x98badcfe, 0x10325476}; // A, B, C, D
             
@@ -256,7 +252,7 @@ public class md5 {
                 K[index] = (int)(long)( (1L << 32) * Math.abs(Math.sin(index + 1)) );
             }
 
-            printIntArray(K);
+            // printIntArray(K);
 
 
 
