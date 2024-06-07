@@ -57,6 +57,7 @@ def md5(message):
             
             print("FAMK")
             print(md5_to_hex(to_rotate)) # should = FAMK
+            # rotate here means shifting
 
             print("rotate_amount")
             print(rotate_amounts[i])

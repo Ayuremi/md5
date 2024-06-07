@@ -124,11 +124,11 @@ public class md5 {
         }
 
         // print test
-        // for (int[] arr: wordList) {
-        //     for (int integer: arr) {
-        //         System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
-        //     }
-        // }
+        for (int[] arr: wordList) {
+            for (int integer: arr) {
+                System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
+            }
+        }
 
         return wordList;
     }
@@ -230,6 +230,13 @@ public class md5 {
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
 
+            //printing out wordList
+            for (int[] arrays: wordList) {
+                for (int elements: arrays) {
+                    System.out.println(String.format("%32s", Integer.toBinaryString(elements)).replace(' ', '0') + " ");
+                }
+            }
+
             int[] OrigInitial = new int[]{0x67452301, (int)0xefcdab89, (int)0x98badcfe, 0x10325476};
             int[] initial = new int[]{0x67452301, (int)0xefcdab89, (int)0x98badcfe, 0x10325476}; // A, B, C, D
             
@@ -238,6 +245,9 @@ public class md5 {
                                 1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12,
                                 5,8,11,14,1,4,7,10,13,0,3,6,9,12,15,2,
                                 0,7,14,5,12,3,10,1,8,15,6,13,4,11,2,9 };
+
+            // word order 
+
 
             // precomputed table but function is floor(232 × abs(sin(i + 1)))
             int[] K = new int[64];
