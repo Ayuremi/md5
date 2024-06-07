@@ -38,6 +38,9 @@ We worked together in class to finish up the md5 function but there was an error
 ### 6/5/24
 We worked together to try and figure out what is wrong with our md5 function. We went back to looking for other websites that have the intermediary values of the md5. We changed K to be computed through a formula instead.
 
+### 6/6/24
+I tried to find out what was going wrong with the code but was unsuccessful. I used online calculators to manually calculate values but they gave different answers than the python program so I'm really confused now. Fixed some code in some areas with misconceptions.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
