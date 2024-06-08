@@ -115,13 +115,12 @@ public class md5 {
 
         // storing as an int 
         for (int x = 0; x < padded.length; x++) {
-            for (int y = 0; y < 16;) {
+            for (int y = 0; y < 64;) {
                 
                 int holder = padded[x][y];
                 for (int z = 0; z < 4; z++) {
-                    holder = holder >> 8;
+                    holder = holder << 8;
                     holder = holder | (padded[x][y++] & 0xff);  // leading 1's are fixed here
-
                 }
                 wordList[x][y/4 - 1] = holder;
             }
@@ -185,9 +184,10 @@ public class md5 {
         System.out.println(printhex(FandA));
         // System.out.println(Long.toHexString(FandA));
 
+        System.out.println("wordList is " + Integer.toHexString(wordList[block][M[step]]));
+
         long FAM = ((FandA + (wordList[block][M[step]])) % 0x100000000L) & 0xFFFFFFFFL;
         System.out.println("\nFAM");
-        // System.out.println("\n" + Integer.toHexString(wordList[block][M[step]]));
         // System.out.println(FAM == 0x179656853L); // for F , rachel: got 54686578 from online calculator?
         System.out.println(printhex(FAM));
         // System.out.println(Long.toHexString(FAM));

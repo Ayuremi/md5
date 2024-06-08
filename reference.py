@@ -52,6 +52,9 @@ def md5(message):
             print("FandA")
             print( md5_to_hex(a + f))
 
+            print("WordList")
+            print(md5_to_hex(int.from_bytes(chunk[4*g:4*g+4], byteorder='little')))
+
             print("FAM")
             print(md5_to_hex(a + f + int.from_bytes(chunk[4*g:4*g+4], byteorder='little'))) 
             
