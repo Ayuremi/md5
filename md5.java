@@ -115,6 +115,7 @@ public class md5 {
 
         // storing as an int 
         for (int x = 0; x < padded.length; x++) {
+
             for (int y = 0; y < 16; y++) {
                 int holder = padded[x][4*y + 3];
                 for(int z = 2; z >= 0 ; z--){
@@ -175,11 +176,13 @@ public class md5 {
         //System.out.println(0x98badcfe == fResult);  // for F 0xfedcba98
         
         System.out.println(Integer.toHexString(fResult));
+
         // System.out.println(fResult == 0x1c1453be); // for G
+        System.out.println("step : " + step);
 
         // switched to long for now because adding ints can make int overflow
         long FandA = ((initial[0]) + (fResult)) % 0x100000000L; 
-        // System.out.println("\nFandA");
+        System.out.println("\nFandA");
         // System.out.println((int)FandA == 0xffffffff);  // for F
         // System.out.println(printhex(FandA));
         System.out.println(Long.toHexString(FandA));
@@ -218,7 +221,7 @@ public class md5 {
                                     // bb3a5b2e02
                                     // 57d41131
         
-        int test = initial[1] + Integer.rotateLeft(initial[0] + fResult + wordList[block][M[step]] + K[step], S[step]);
+        // int test = initial[1] + Integer.rotateLeft(initial[0] + fResult + wordList[block][M[step]] + K[step], S[step]);
         // actually gives the same thing i think??? which is kind of stupid that we did all that work lmao
 
         initial[0] = initial[3]; 
@@ -307,6 +310,7 @@ public class md5 {
             int[] initial = new int[4];
             // for (int block = 0; block < wordList.length; block++) {
             initial = OrigInitial.clone();
+
             for (int step = 0; step < 7; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
                 System.out.println("a: " + Integer.toHexString(initial[0]));
@@ -332,7 +336,7 @@ public class md5 {
             }
 
             //System.out.println(String.format("%8x",etargdhf).replace(" ", "0"));
-            System.out.println(hash);
+            System.out.println("\n" + hash);
             
             // }
 
