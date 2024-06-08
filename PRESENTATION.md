@@ -22,4 +22,4 @@ Nope, MD5 is no longer used (or at least shouldn't be) for hashing passwords bec
 MD5 is still used to authenicate messages and files sent from one device to another (but messages and files are still vulnerable to [collision attacks](https://www.gomyitguy.com/blog-news-updates/hash-collision-attacks)) 
 
 ## Brief History of MD5
-Invented by Ronald Rivest, MD5 was released in 1992 to replace MD4 (which was deemed insecure since the beginning of the 1990's, due to collision attacks). MD5 had more complex hash calculations than MD4 (and was also slower) 
+Invented by Ronald Rivest, MD5 was released in 1992 to replace MD4 (which was deemed insecure since the beginning of the 1990's, due to collision attacks). MD5 had more complex hash calculations than MD4 (and was also slower due to these complex hash calculations).
