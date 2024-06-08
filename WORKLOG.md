@@ -71,3 +71,5 @@ https://www.lifewire.com/what-is-md5-2625937
 https://medium.com/innoviletech/difference-between-md4-and-md5-encryption-3f4a7f42d251 
 
 https://us.norton.com/blog/privacy/mdfive-hash
+
+https://www.kb.cert.org/vuls/id/836068 
