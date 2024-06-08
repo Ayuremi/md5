@@ -63,3 +63,7 @@ Finished the functionF and started to move on to the next step
 
 ### 2024/05/31
 Changed how the functionF function works in order to use it for the whole md5 main alogrithm
+
+
+
+https://www.lifewire.com/what-is-md5-2625937
