@@ -10,4 +10,4 @@ Data is put through hash algorithms for its protection (ensures data integrity)!
 Let's say you're logging on to your email. After you type in your email you (hopefully) need to type in your password.
 ![Logging in example](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/Logging%20in.png)
 
-Now google or whatever service you use for emails has to verify that you have typed the right password. 
+Now google or whatever service you use for emails has to verify that you have typed the right password. That's should be simple, right? They'll just compare what you typed in with the password they have saved on their website/servers! Well no. Google and any reasonable service that has a login process does not save users passwords directly on their website. 
