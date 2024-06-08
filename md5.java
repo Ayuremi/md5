@@ -115,11 +115,11 @@ public class md5 {
 
         // storing as an int 
         for (int x = 0; x < padded.length; x++) {
-            for (int y = 0; y < 64;) {
+            for (int y = 0; y < 16;) {
                 
                 int holder = padded[x][y];
                 for (int z = 0; z < 4; z++) {
-                    holder = holder << 8;
+                    holder = holder >> 8;
                     holder = holder | (padded[x][y++] & 0xff);  // leading 1's are fixed here
 
                 }
@@ -128,11 +128,11 @@ public class md5 {
         }
 
         // print test
-        for (int[] arr: wordList) {
-            for (int integer: arr) {
-                System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
-            }
-        }
+        // for (int[] arr: wordList) {
+        //     for (int integer: arr) {
+        //         System.out.println(String.format("%32s", Integer.toBinaryString(integer)).replace(' ', '0') + " ");
+        //     }
+        // }
 
         return wordList;
     }
@@ -172,53 +172,54 @@ public class md5 {
 
         
         // Check
-        System.out.println(0x98badcfe == fResult);  // for F 0xfedcba98
+        // System.out.println(0x98badcfe == fResult);  // for F 0xfedcba98
         
-        System.out.println(printhex(fResult));
+        // System.out.println(printhex(fResult));
         // System.out.println(fResult == 0x1c1453be); // for G
+        System.out.println("step : " + step);
 
         // switched to long for now because adding ints can make int overflow
         long FandA = ((initial[0]) + (fResult)) % 0x100000000L; 
-        // System.out.println("\nFandA");
+        System.out.println("\nFandA");
         // System.out.println((int)FandA == 0xffffffff);  // for F
-        // System.out.println(printhex(FandA));
+        System.out.println(printhex(FandA));
         // System.out.println(Long.toHexString(FandA));
 
         long FAM = ((FandA + (wordList[block][M[step]])) % 0x100000000L) & 0xFFFFFFFFL;
-        // System.out.println("\nFAM");
+        System.out.println("\nFAM");
         // System.out.println("\n" + Integer.toHexString(wordList[block][M[step]]));
         // System.out.println(FAM == 0x179656853L); // for F , rachel: got 54686578 from online calculator?
-        // System.out.println(printhex(FAM));
+        System.out.println(printhex(FAM));
         // System.out.println(Long.toHexString(FAM));
 
         long FAMK = ((FAM + (K[step])) % 0x100000000L) & 0xFFFFFFFFL;
-        // System.out.println("\nFAMK");
+        System.out.println("\nFAMK");
         // System.out.println("\n" + Integer.toHexString(K[step]));
         // System.out.println(FAMK == 0x250d00ccbL);  // for F, rachel: got 2BD309F0
-        // System.out.println(printhex(FAMK));
+        System.out.println(printhex(FAMK));
         // 250d00ccb
 
 
         long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) ) & 0xFFFFFFFFL ;
-        // System.out.println("rotate_amount: " + S[step]);
-        // System.out.println("\nFAMKS");
+        System.out.println("rotate_amount: " + S[step]);
+        System.out.println("\nFAMKS");
         // System.out.println(FAMKS == 0x680665a8);  // for f | works if it's casted into an int
         //                                           // rachel: got E984F815
-        // System.out.println(printhex(FAMKS));
+        System.out.println(printhex(FAMKS));
 
         long FAMKSB = ((FAMKS + (initial[1])) % 0x100000000L ) & 0xFFFFFFFFL;
-        // System.out.println("\nFAMKSB");
+        System.out.println("\nFAMKSB");
         // System.out.println("\n" + Integer.toHexString(initial[1]));
         // System.out.println( FAMKSB == 0x57d41131); // for F // 0x7330C604 // rachel: got D952A39E
-        // System.out.println(printhex(FAMKSB));
+        System.out.println(printhex(FAMKSB));
         // 57d41131
 
-        System.out.println(Integer.toHexString((int)FAMKSB));
+        // System.out.println(Integer.toHexString( (int) FAMKSB));
                                     //  cfcdeecf
                                     // bb3a5b2e02
                                     // 57d41131
         
-        int test = initial[1] + Integer.rotateLeft(initial[0] + fResult + wordList[block][M[step]] + K[step], S[step]);
+        // int test = initial[1] + Integer.rotateLeft(initial[0] + fResult + wordList[block][M[step]] + K[step], S[step]);
         // actually gives the same thing i think??? which is kind of stupid that we did all that work lmao
 
         initial[0] = initial[3]; 
@@ -241,11 +242,11 @@ public class md5 {
             int[][] wordList = splitIntoWords(padded);
 
             //printing out wordList
-            for (int[] arrays: wordList) {
-                for (int elements: arrays) {
-                    System.out.println(String.format("%32s", Integer.toBinaryString(elements)).replace(' ', '0') + " ");
-                }
-            }
+            // for (int[] arrays: wordList) {
+            //     for (int elements: arrays) {
+            //         System.out.println(String.format("%32s", Integer.toBinaryString(elements)).replace(' ', '0') + " ");
+            //     }
+            // }
 
             int[] OrigInitial = new int[]{0x67452301, (int)0xefcdab89L, (int)0x98badcfeL, 0x10325476};
             //for (int x = 0; x < 4; x++) System.out.println(x + ": " + Integer.toHexString(OrigInitial[x]));
@@ -266,7 +267,7 @@ public class md5 {
                 K[index] = (int)(long)( (1L << 32) * Math.abs(Math.sin(index + 1)) );
             }
 
-            printIntArray(K);
+            // printIntArray(K);
 
 
 
@@ -307,7 +308,7 @@ public class md5 {
             int[] initial = new int[4];
             // for (int block = 0; block < wordList.length; block++) {
             initial = OrigInitial.clone();
-            for (int step = 0; step < 2; step++) { 
+            for (int step = 0; step < 5; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
             }
             //}
@@ -328,7 +329,7 @@ public class md5 {
             }
 
             //System.out.println(String.format("%8x",etargdhf).replace(" ", "0"));
-            System.out.println(hash);
+            System.out.println("\n" + hash);
             
             // }
 
