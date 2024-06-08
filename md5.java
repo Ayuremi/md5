@@ -118,7 +118,8 @@ public class md5 {
             for (int y = 0; y < 64;) {
                 
                 int holder = padded[x][y];
-                for (int z = 0; z < 4; z++) {
+                // Systemt.out.prinln("holder is : " + Integer.toHexString(holder));
+                for (int z = 0; z < 4; z++) { // this just happens 4 times
                     holder = holder << 8;
                     holder = holder | (padded[x][y++] & 0xff);  // leading 1's are fixed here
                 }
