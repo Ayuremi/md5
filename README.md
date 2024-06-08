@@ -6,4 +6,7 @@ Rachel Gao and Nathaniel Ciu
 ## Overview
 MD5 replicator 
 
+[Video Link Placeholder]()
+[Presentation.md](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/PRESENTATION.md)
+
 ## Instructions
