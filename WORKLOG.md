@@ -84,3 +84,10 @@ Figured out what was going on in our python reference and will now use it to deb
 
 ### 2024/06/07
 Figured out that we messed up word storage. Rachel fixed it. In process of figure out why our algorithm messes up on "step 7."
+
+
+
+
+Sources 
+https://www.digitizationguidelines.gov/term.php?term=hashalgorithm 
+https://www.techtarget.com/searchdatamanagement/definition/hashing
