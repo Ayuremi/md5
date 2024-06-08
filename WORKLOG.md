@@ -67,3 +67,4 @@ Changed how the functionF function works in order to use it for the whole md5 ma
 
 
 https://www.lifewire.com/what-is-md5-2625937
+https://medium.com/innoviletech/difference-between-md4-and-md5-encryption-3f4a7f42d251 
