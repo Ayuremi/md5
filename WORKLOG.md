@@ -117,3 +117,5 @@ https://www.kb.cert.org/vuls/id/836068
 https://www.comparitech.com/blog/information-security/what-is-a-collision-attack/
 
 https://www.comparitech.com/blog/information-security/md5-algorithm-with-examples/
+
+https://rosettacode.org/wiki/MD5/Implementation#Python
