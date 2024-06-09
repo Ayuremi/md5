@@ -3,11 +3,24 @@
 Rachel Gao and Nathaniel Ciu
 
 ## Overview
-MD5 replicator 
+This is a Java implementation of the MD5 hashing algorithm. The program takes a user-inputted string and performs calculations on the bits of the string. The program will output the corresponding MD5 hash of the string.
 
 ## Instructions
-Doing Instructions later
+To run the program:
 
+```
+make encode ARGS="<string here>"
+ex. make encode ARGS="hi"
+```
+
+If the input string has spaces, make sure to add `'` around the entire string.
+
+```
+make encode ARGS="'<string with spaces here>'"
+ex. make encode ARGS="'This is an example of a string with spaces'"
+```
+
+The program will print out the md5 hash of the input string.
 
 
 
