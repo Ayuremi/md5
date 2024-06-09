@@ -80,10 +80,10 @@ There are 4 rounds in the MD5 algorithim. In these rounds we will use different 
 
 First we have the order in which we have to add the words to the initial value A.
 ```
-Round 1: the words in numerial order (0, 1, 2, ..., 15) 
-Round 2: 1, 6, 11, 0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12
-Round 3: 5, 8, 11, 14, 1, 4, 7, 10, 13, 0, 3, 6, 9, 12, 15, 2
-Round 4: 0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9
+Round 0: the words in numerial order (0, 1, 2, ..., 15) 
+Round 1: 1, 6, 11, 0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12
+Round 2: 5, 8, 11, 14, 1, 4, 7, 10, 13, 0, 3, 6, 9, 12, 15, 2
+Round 3: 0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9
 ```
 
 
@@ -97,20 +97,20 @@ the absolute value of (sin(i + 1)) * 2 to the 32nd power)
 
 We also have a specific amount to bit shift a word by. 
 ```
-Round 1: 7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
-Round 2: 5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,
-Round 3: 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
-Round 4: 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21
+Round 0: 7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
+Round 1: 5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,
+Round 2: 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
+Round 3: 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21
 ```
 Notice that each round consists of four repeating numbers. (These numbers repeat because it's just easier to iterate over) 
 
 
 Then we we have the bitwise operations for each round
 ```
-Round 1: (B & C) | (~B & D)
-Round 2: (B & D) | (C & ~D)
-Round 3: (B ^ C ^ D)
-Round 4 : C⊕(B∨¬D)
+Round 0: (B & C) | (~B & D)
+Round 1: (B & D) | (C & ~D)
+Round 2: (B ^ C ^ D)
+Round 3 : C⊕(B∨¬D)
 ```
 Yes those letters are indeed referencing the initial values we have earlier!
 
@@ -120,4 +120,15 @@ Got all that?
 
 
 Let's actually start getting into the main algorithim!
+
+### Main algorithim
+For the first round
+
+Take the value of the Round 1 bitwise operation and add it to the initial value A and modulo that result with 0x100000000L!
+
+Then add that result with the the correct word! In this case (round 0, step 0), we need to add word #0 with the result of the previous expression! Modulo this result with 0x100000000L. And after that modulo that result with 0xFFFFFFFFL.
+
+Then add the correct K value! In this case (round 0, step 0), we need to add K0
+
+
 
