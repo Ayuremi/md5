@@ -48,6 +48,7 @@ Because MD5's main weakness is collisions attacks, let's dive into collisions in
 
 ### Why are collision unavoidable?
 The pigeonhole principle basically goes like this if there are more inputs than outputs, then some inputs must share the same output (Called the pigeonhole principle because of this explaination: If there are more pigeons than pigeonholes, some of the holes must contain more than one pigeon). 
+
 ![Too many pigeons for the holes](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/Pigeon%20Hole.png)
 
 Because MD5 hashes are always a set length (128 bits) and there are infinite amount of inputs there will be some inputs that share the same output. This is also true for SHA-256 (another hash algorithim), which has (256 bits). **But SHA-256 is considered secure wihle MD5 is not. Why?**
