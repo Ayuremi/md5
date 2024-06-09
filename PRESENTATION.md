@@ -85,5 +85,7 @@ Round 4: 0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9
 
 We have a constant to add to the word and the initial value. The constant, let's call it K, can be calculated using
 ```
-(1L << 32) * Math.abs(Math.sin(index + 1))
+(1L << 32) * Math.abs(Math.sin(i + 1)) with i denoting the K value. Ex.) if i = 1, then Ki = k1 = 
+or in more math terms
+the absolute value of (sin(
 ```
