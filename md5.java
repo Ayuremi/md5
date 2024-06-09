@@ -315,11 +315,11 @@ public class md5 {
             //     System.out.println(element + " ");
             // }
             
-            int[] initial = new int[4];
+            int[] initial = new int[]{0x67452301, (int)0xefcdab89L, (int)0x98badcfeL, 0x10325476};
             // for (int block = 0; block < wordList.length; block++) {
-            initial = OrigInitial.clone();
+            //initial = OrigInitial.clone();
 
-            for (int step = 0; step < 16; step++) { 
+            for (int step = 0; step < 64; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
                 // System.out.println("a: " + Integer.toHexString(initial[0]));
                 // System.out.println("b: " + Integer.toHexString(initial[1]));
@@ -328,19 +328,26 @@ public class md5 {
             }
             //}
             
-            // for (int x = 0; x < 4; x++){
-            //     long temp = (((long)initial[x] + (long)OrigInitial[x] )% 0x100000000L)& 0xFFFFFFFFL;
-            //     OrigInitial[x] = (int)temp;
-            // }
+            for (int init: OrigInitial) System.out.print(Integer.toHexString(init) + " ");
+            System.out.println("");
+            for (int init: initial) System.out.print(Integer.toHexString(init) + " ");
+            for (int x = 0; x < 4; x++){
+                long temp = ((long)initial[x] + (long)OrigInitial[x] )% 0x100000000L;
+                OrigInitial[x] = (int)temp;
+            }
             
             // int[] temp = new int[]{0x799d1352,0x2c34dfa2,0xde1673be,0x4b976282};
             // int etargdhf = (temp[1] & temp[3]) | (temp[2] & ~temp[3]); 
             
             String hash = "";
             for (int x = 0; x < 4; x++){
-                hash += Integer.toHexString(initial[x]) + " "; //should be originitial btw
+                hash += Integer.toHexString(OrigInitial[x] & 0xFF);
+                hash += Integer.toHexString((OrigInitial[x] >> 8) & 0xFF);
+                hash += Integer.toHexString((OrigInitial[x] >> 16) & 0xFF);
+                hash += Integer.toHexString((OrigInitial[x] >> 24) & 0xFF); //should be originitial btw
                 //hash += Integer.toBinaryString(initial[x]).replace(" ", "0") + " ";
                 //hash += initial[x] + " ";
+                
             }
 
             //System.out.println(String.format("%8x",etargdhf).replace(" ", "0"));
