@@ -76,9 +76,11 @@ D = 0x10325476
 There are 4 rounds in the MD5 algorithim. In these rounds we will use different constants for different things.
 
 First we have the order in which we have to add the words to the initial value A.
+```
 Round 1: the words in numerial order (0, 1, 2, ..., 15) 
 Round 2: 1, 6, 11, 0, 5, 10, 15, 4, 9, 14, 3, 8, 13, 2, 7, 12
 Round 3: 5, 8, 11, 14, 1, 4, 7, 10, 13, 0, 3, 6, 9, 12, 15, 2
 Round 4: 0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9
+```
 
 
