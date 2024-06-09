@@ -51,7 +51,7 @@ The pigeonhole principle basically goes like this if there are more inputs than 
 
 ![Too many pigeons for the holes](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/Pigeon%20Hole.png)
 
-Because MD5 hashes are always a set length (128 bits) and an infinite amount of inputs there will be some inputs that share the same output. This is also true for SHA-256 (another hash algorithim), which has (256 bits). **But SHA-256 is considered secure wihle MD5 is not. Why?**
+Because MD5 hashes are always a set length (128 bits) and an infinite amount of inputs there will be some inputs that share the same output. This is also true for SHA-256 (another hash algorithim), which has a set length of 256 bits. **But SHA-256 is considered secure wihle MD5 is not. Why?**
 
 The reason why SHA-256 is considered secure is because it's not really fleasible (for now) to find two different inputs that result in the same output. Why? Well because SHA-256 produces longer hashes there are way more combinations available so finding a collision with today's technology would take too much time, effort, and resources. This used to be the case for MD5 as well! Even though MD5 was theorically collision vulnerable, the technology of the 1990's could not practically find two inputs that shared the same output within a reasonable time frame and resource investment, which was why people still used it after the 1996 research paper. 
 
