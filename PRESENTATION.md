@@ -5,6 +5,7 @@ MD5 is a hashing algorithm! What is a hashing algorithm? According to the Federa
 
 ### Why do we need hashing algorithms? Why are they useful?
 Data is put through hash algorithms for its protection (ensures data integrity)! The idea is if someone gains access to your server, they would be unable to read the data even though the data is technically stored there. 
+![When hackers try to read a hashed database](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/What%20is%20this!.png)
 
 ### But how does Hashing achieve this? 
 Let's say you're logging on to your email. After you type in your email you (hopefully) need to type in your password.
