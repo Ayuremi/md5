@@ -33,6 +33,8 @@ Invented by Ronald Rivest, MD5 was released in 1992 to replace MD4 (which was de
 
 But MD5 suffered from similar collision problems. In 1996, research was published describing a weakness in the MD5 algorithim (most likly the short hash length). In 2004, [more researched](https://eprint.iacr.org/2004/199.pdf) was published on the practically of a malicious entity to generate collisions. In 2005, there was a demostration that generated colliding [x.509 certificates](https://www.ssl.com/faqs/what-is-an-x-509-certificate/). In 2008, Carnegie Mellon University declared that MD5 should be "considered cryptographically broken" due to its vulunerablility to collision attacks. In 2009 at the 25th annual Chaos Communication Conference (25C3), [presenters claimed that they used 200 PlayStation 3 game consoles to attack a single hash in four weekends](https://www.speedguide.net/news/md5-is-officially-insecure-hackers-break-ssl-certificates-2752) costing them $657, which was impressive at the time.
 
+MD5 is still used today, dispites its drawbacks and better alternatives. Some speculations (note these speculations were taken from at least 10 year old forums) of why MD5 is still used is that developers don't know any better, developers are ignorant about better solutions, MD5 was what was traditionally used and old habits die hard (also legacy systems), the vunlerabilities aren't significant enough to be an obvious problem, compatibility with software, perfermance speed. Generally using MD5 today is not advisable. 
+
 ### What are collision attacks?
 
 ## How MD5 Works
