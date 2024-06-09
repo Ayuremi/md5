@@ -124,7 +124,7 @@ Let's actually start getting into the main algorithim!
 ### Main algorithim
 For the first round
 
-Take the value of the Round 1 bitwise operation and add it to the initial value A and modulo that result with 0x100000000L!
+Take the value of the Round 0 bitwise operation and add it to the initial value A and modulo that result with 0x100000000L!
 
 Then add that result with the the correct word! In this case (round 0, step 0), we need to add word #0 with the result of the previous expression! Modulo this result with 0x100000000L. And after that modulo, mudulo (yes again) that result with 0xFFFFFFFFL.
 
