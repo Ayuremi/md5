@@ -36,6 +36,7 @@ But MD5 suffered from similar collision problems. In 1996, research was publishe
 MD5 is still used today, dispites its drawbacks and better alternatives. Some speculations (note these speculations were taken from at least 10 year old forums) of why MD5 is still used is that developers don't know any better, developers are ignorant about better solutions, MD5 was what was traditionally used and old habits die hard (also legacy systems), the vunlerabilities aren't significant enough to be an obvious problem, compatibility with software, perfermance speed. Generally using MD5 today is not advisable. 
 
 ### What are collision attacks?
+Because MD5's main weakness is collisions attacks, let's 
 
 ## How MD5 Works
 
