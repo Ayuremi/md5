@@ -98,7 +98,7 @@ Found that the algorithim messes up with shifting. And started working on presen
 Rachel fixed everything. I'm running test cases to make sure. Finishing presentation.md and video by tonight!
 
 
-Sources 
+Sources/References
 
 https://www.digitizationguidelines.gov/term.php?term=hashalgorithm 
 
@@ -115,3 +115,5 @@ https://us.norton.com/blog/privacy/mdfive-hash
 https://www.kb.cert.org/vuls/id/836068 
 
 https://www.comparitech.com/blog/information-security/what-is-a-collision-attack/
+
+https://www.comparitech.com/blog/information-security/md5-algorithm-with-examples/
