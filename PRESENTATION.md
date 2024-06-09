@@ -74,6 +74,7 @@ C = 0x98badcfe
 D = 0x10325476
 ```
 
+
 There are 4 rounds in the MD5 algorithim. In these rounds we will use different constants for different things.
 
 First we have the order in which we have to add the words to the initial value A.
@@ -84,12 +85,14 @@ Round 3: 5, 8, 11, 14, 1, 4, 7, 10, 13, 0, 3, 6, 9, 12, 15, 2
 Round 4: 0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9
 ```
 
+
 We have a constant to add to the word and the initial value. The constant, let's call it K, can be calculated using
 ```
 (1L << 32) * Math.abs(Math.sin(i + 1)) with i denoting the K value. Ex.) if i = 0, then Ki = K0 = 0xd76aa478
 or in more math terms
 the absolute value of (sin(i + 1)) * 2 to the 32nd power)
 ```
+
 
 We also have a specific amount to bit shift a word by. 
 ```
@@ -100,6 +103,7 @@ Round 4: 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21
 ```
 Notice that each round consists of four repeating numbers. (These numbers repeat because it's just easier to iterate over) 
 
+
 Then we we have the bitwise operations for each round
 ```
 Round 1: (B & C) | (~B & D)
@@ -107,6 +111,7 @@ Round 2: (B & D) | (C & ~D)
 Round 3: (B ^ C ^ D)
 Round 4 : C⊕(B∨¬D)
 ```
+
 Got all that?
 
 ![Studying](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW95bGtrbjBhbmJpamphOTQ1NHV5ajkwbmJoc2g3dzMyNnUxODBmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KCqO4k31TnkC2pT5LY/giphy-downsized-large.gif)
