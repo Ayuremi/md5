@@ -30,7 +30,7 @@ MD5 is still used to authenicate messages and files sent from one device to anot
 ## Brief History of MD5
 Invented by Ronald Rivest, MD5 was released in 1992 to replace MD4 (which was deemed insecure since the beginning of the 1990's, due to collision attacks). MD5 had more complex hash calculations than MD4 (and was also slower due to these complex hash calculations).
 
-But MD5 suffered from similar collision problems. In 1996, research was published describing a weakness in the MD5 algorithim (most likly the short hash length) 
+But MD5 suffered from similar collision problems. In 1996, research was published describing a weakness in the MD5 algorithim (most likly the short hash length). In 2004, [more researched](https://eprint.iacr.org/2004/199.pdf) was published on the practically of a malicious entity to generate collisions. In 2005, there was a demostration that generated colliding (x.509 certificates)[https://www.ssl.com/faqs/what-is-an-x-509-certificate/]
 Carnegie Mellon University declared that MD5 should be "considered cryptographically broken" due to its vulunerablility to collision attacks 
 
 ### What are collision attacks?
