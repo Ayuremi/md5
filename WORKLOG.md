@@ -91,7 +91,11 @@ Figured out what was going on in our python reference and will now use it to deb
 ### 2024/06/07
 Figured out that we messed up word storage. Rachel fixed it. In process of figure out why our algorithm messes up on "step 7."
 
+### 2024/06/08 
+Found that the algorithim messes up with shifting. And started working on presentation.md
 
+### 2024/06/09 
+Rachel fixed everything. I'm running test cases to make sure. Finishing presentation.md and video by tonight!
 
 
 Sources 
