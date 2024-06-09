@@ -66,6 +66,7 @@ Before we move on with manipulating said words we need to establish a few consta
 
 ### Constants
 **All values given in little endian**
+
 There are four initials values. Let's call then A,B,C, and D!
 ```
 A = 0x67452301 
