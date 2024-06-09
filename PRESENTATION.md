@@ -116,3 +116,6 @@ Round 4 : C⊕(B∨¬D)
 Got all that?
 
 ![Studying](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW95bGtrbjBhbmJpamphOTQ1NHV5ajkwbmJoc2g3dzMyNnUxODBmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KCqO4k31TnkC2pT5LY/giphy-downsized-large.gif)
+
+
+Let's actually start getting into the main algorithim!
