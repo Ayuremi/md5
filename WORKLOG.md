@@ -73,3 +73,5 @@ https://medium.com/innoviletech/difference-between-md4-and-md5-encryption-3f4a7f
 https://us.norton.com/blog/privacy/mdfive-hash
 
 https://www.kb.cert.org/vuls/id/836068 
+
+https://www.comparitech.com/blog/information-security/what-is-a-collision-attack/
