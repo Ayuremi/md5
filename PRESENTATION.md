@@ -146,6 +146,10 @@ C = B
 B = the value we just calculated!
 ```
 
+Repeat the first round 15 more times, exchanging constants as needed! 
+
+After that move on the the 2nd, 3rd, and 4th round!
+The only change that happens is the bitwise operation! The constants should be easily iterated through!
 
 
 
