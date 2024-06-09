@@ -329,9 +329,9 @@ public class md5 {
                 }
                 //}
                 
-                for (int init: OrigInitial) System.out.print(Integer.toHexString(init) + " ");
-                System.out.println("");
-                for (int init: initial) System.out.print(Integer.toHexString(init) + " ");
+                //for (int init: OrigInitial) System.out.print(Integer.toHexString(init) + " ");
+                //System.out.println("");
+                //for (int init: initial) System.out.print(Integer.toHexString(init) + " ");
                 for (int x = 0; x < 4; x++){
                     long temp = ((long)initial[x] + (long)OrigInitial[x] )% 0x100000000L;
                     OrigInitial[x] = (int)temp;
@@ -353,7 +353,7 @@ public class md5 {
             }
 
             //System.out.println(String.format("%8x",etargdhf).replace(" ", "0"));
-            System.out.println("\n" + hash);
+            System.out.println(hash);
             
             // }
 
