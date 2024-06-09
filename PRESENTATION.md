@@ -57,9 +57,8 @@ The reason why SHA-256 is considered secure is because it's not really fleasible
 ![But it's not possible](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/But%20it%20is%20not%20possible.png)
 
 ## How MD5 Works
-When MD5 recieves the input the first thing it does is pad it! 
+When MD5 recieves the input the first thing it does is pad it! 10000000 is first added to the binary of the input and then 00000000 is added in order to ensure that the input is divisble by 512. The reason being is that MD5 works with 512 bit blocks! We also need to have at least one byte of padding. When the padding is done the original input length is stored using the last eight bytes in the last block. 
+![MD5 Padding Input](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/MD5%20Padding%20Input.png)
 
-10000000 is first added to the binary of the input and then 00000000 is added in order to ensure that the input is divisble by 512. The reason being is that MD5 works with 512 bit blocks! We also need to have at least one byte of padding. When the padding is done the original input length is stored using the last eight bytes in the last block. 
-
-
+Once we're done padding and have nice 512 bit blocks  
 
