@@ -201,7 +201,7 @@ public class md5 {
         // System.out.println(Long.toHexString(FAM));
         // System.out.println("HERE");
 
-        long FAMK = (FAM + (K[step])) % 0x100000000L;
+        long FAMK = ((FAM + (K[step])) % 0x100000000L) & 0xFFFFFFFFL;
         System.out.println("FAMK");
         // System.out.println("\n" + Integer.toHexString(K[step]));
         // System.out.println(FAMK == 0x250d00ccbL);  // for F, rachel: got 2BD309F0
@@ -316,7 +316,7 @@ public class md5 {
             // for (int block = 0; block < wordList.length; block++) {
             initial = OrigInitial.clone();
 
-            for (int step = 0; step < 7; step++) { 
+            for (int step = 0; step < 15; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
                 // System.out.println("a: " + Integer.toHexString(initial[0]));
                 // System.out.println("b: " + Integer.toHexString(initial[1]));

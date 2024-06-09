@@ -88,6 +88,11 @@ def md5(message):
 
 
             a, b, c, d = d, new_b, b, c
+
+            print("a: " + md5_to_hex(a))
+            print("b: " + md5_to_hex(b))
+            print("c: " + md5_to_hex(c))
+            print("d: " + md5_to_hex(d))
             
         for i, val in enumerate([a, b, c, d]):
             hash_pieces[i] += val
