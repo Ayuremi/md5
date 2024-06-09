@@ -39,7 +39,7 @@ But MD5 suffered from similar collision problems. In 1996, research was publishe
 [MD5 is still used today](https://www.zdnet.com/article/a-quarter-of-major-cmss-use-outdated-md5-as-the-default-password-hashing-scheme/), dispites its drawbacks and better alternatives. Some speculations (note these speculations were taken from at least 10 year old forums) of why MD5 is still used is that developers don't know any better, developers are ignorant about better solutions, MD5 was what was traditionally used and old habits die hard (also legacy systems), the vunlerabilities aren't significant enough to be an obvious problem, compatibility with software, performance speed. Generally using MD5 today is not advisable. 
 ![Some devs when they find out they shouldn't use MD5](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/But%20I%20like%20it%20sad%20face.png)
 
-### What are collision attacks?
+## What are collision attacks?
 Because MD5's main weakness is collisions attacks, let's 
 
 ## How MD5 Works
