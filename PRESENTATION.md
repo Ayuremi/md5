@@ -60,5 +60,22 @@ The reason why SHA-256 is considered secure is because it's not really fleasible
 When MD5 recieves the input the first thing it does is pad it! 10000000 is first added to the binary of the input and then 00000000 is added in order to ensure that the input is divisble by 512. The reason being is that MD5 works with 512 bit blocks! We also need to have at least one byte of padding so if the input is exactly 512 bits (or a multiple of 512) we need another 512 block. When the padding is done the original input length is stored using the last eight bytes in the last block. 
 ![MD5 Padding Input](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/MD5%20Padding%20Input.png)
 
-Once we're done padding and have nice 512 bit blocks, we need to split our blocks into 4 byte "words". Because each block is 512 bits (or 64 bytes) we should have 16 words for each block!  
+Once we're done padding and have nice 512 bit blocks, we need to split our blocks into 4 byte "words". Because each block is 512 bits (or 64 bytes) we should have 16 words for each block! 
+
+Before we move on with manipulating said words we need to establish a few constants! 
+
+### Constants
+There are four initials values (in little endian), let's call then A,B,C, and D!
+```
+A = 0x67452301 
+B = 0x67452301  
+C = 0x98badcfe
+D = 0x10325476
+```
+
+There are 4 rounds in the MD5 algorithim. In these rounds we will use different constants for different things.
+
+First we have the order in which we have to add the words to the initial value.
+
+
 
