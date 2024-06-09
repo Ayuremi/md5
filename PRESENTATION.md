@@ -17,6 +17,7 @@ Saving passwords makes it easier for any malicious entity to hackjack user accou
 
 ### What prevents the bad guys from reversing the hash to get the password?
 Hash algorithims are designed to be one way functions, so if you happen to get an output (a hash), it would be very difficult to reverse the algorithim determine the input (the password or original data). 
+
 ![Hackers when they find a hash database](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/Ah%20No%20Hashes%202.png)
 
 
