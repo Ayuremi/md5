@@ -65,7 +65,8 @@ Once we're done padding and have nice 512 bit blocks, we need to split our block
 Before we move on with manipulating said words we need to establish a few constants! 
 
 ### Constants
-There are four initials values (in little endian), let's call then A,B,C, and D!
+**All values given in little endian**
+There are four initials values. Let's call then A,B,C, and D!
 ```
 A = 0x67452301 
 B = 0x67452301  
@@ -85,7 +86,7 @@ Round 4: 0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9
 
 We have a constant to add to the word and the initial value. The constant, let's call it K, can be calculated using
 ```
-(1L << 32) * Math.abs(Math.sin(i + 1)) with i denoting the K value. Ex.) if i = 1, then Ki = k1 = 
+(1L << 32) * Math.abs(Math.sin(i + 1)) with i denoting the K value. Ex.) if i = 0, then Ki = K0 = 0xd76aa478
 or in more math terms
-the absolute value of (sin(
+the absolute value of (sin(i + 1)) * 2 to the 32nd power)
 ```
