@@ -254,9 +254,9 @@ public class md5 {
 
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
-            for (int[] block : wordList){
-                for (int word : block) System.out.println(Integer.toHexString(word));
-            }
+            // for (int[] block : wordList){
+            //     for (int word : block) System.out.println(Integer.toHexString(word));
+            // }
 
             int[] OrigInitial = new int[]{0x67452301, (int)0xefcdab89L, (int)0x98badcfeL, 0x10325476};
             //for (int x = 0; x < 4; x++) System.out.println(x + ": " + Integer.toHexString(OrigInitial[x]));
