@@ -43,6 +43,7 @@ But MD5 suffered from similar collision problems. In 1996, research was publishe
 
 ## Collisions!
 Because MD5's main weakness is collisions attacks, let's dive into collisions in greater detail! As stated before, hash collisions happens when two inputs generate the same hash value. The reason this is a problem is because malicious entities to undermine authentication and integrity of digital signatures (basically another name for hashes) because they can pretend to be an authorized user or have tampered files be marked as legitimate. It's actually impossible to avoid hash collisions.
+
 ![One does not simply avoid hash collisions](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/Avoid%20Collisions.png)
 
 ### Why are collision unavoidable?
