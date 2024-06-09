@@ -39,6 +39,7 @@ But MD5 suffered from similar collision problems. In 1996, research was publishe
 [MD5 is still used today](https://thehackernews.com/2022/11/french-electricity-provider-fined-for.html) ([another less recent example](https://www.zdnet.com/article/a-quarter-of-major-cmss-use-outdated-md5-as-the-default-password-hashing-scheme/)), dispites its drawbacks and better alternatives. Some speculations (note these speculations were taken from at least 10 year old forums) of why MD5 is still used is that developers are ignorant about its problems, developers are ignorant about better solutions, legacy systems / compatibility with software, and performance speed. Generally using MD5 today is not advisable. 
 
 ![Some devs when they find out they shouldn't use MD5](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/But%20I%20like%20it%20sad%20face.png)
+![Switch from MD5 or draw 25](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/Uno%20Game.png)
 
 ## Collisions!
 Because MD5's main weakness is collisions attacks, let's dive into collisions in greater detail! As stated before, hash collisions happens when two inputs generate the same hash value. The reason this is a problem is because malicious entities to undermine authentication and integrity of digital signatures (basically another name for hashes) because they can pretend to be an authorized user or have tampered files be marked as legitimate. It's actually impossible to avoid hash collisions
