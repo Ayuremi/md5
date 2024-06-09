@@ -112,6 +112,7 @@ Round 2: (B & D) | (C & ~D)
 Round 3: (B ^ C ^ D)
 Round 4 : C⊕(B∨¬D)
 ```
+Yes those letters are indeed referencing the initial values we have earlier!
 
 Got all that?
 
@@ -119,3 +120,4 @@ Got all that?
 
 
 Let's actually start getting into the main algorithim!
+
