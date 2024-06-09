@@ -21,7 +21,16 @@ index_functions = 16*[lambda i: i] + \
                   16*[lambda i: (7*i)%16]
 
 def left_rotate(x, amount):
+    print("FAMK")
+    print(md5_to_hex(x))
     x &= 0xFFFFFFFF
+    print("In left rotate")
+    print("First shift")
+    print((x<<amount))
+    print("Second shift")
+    print((x>>(32-amount)))
+    print("The or")
+    print((x<<amount) | (x>>(32-amount))) 
     return ((x<<amount) | (x>>(32-amount))) & 0xFFFFFFFF
 
 def md5(message):
@@ -57,8 +66,8 @@ def md5(message):
 
             print("FAM")
             print(md5_to_hex(a + f + int.from_bytes(chunk[4*g:4*g+4], byteorder='little'))) 
-            print("Actually word")
-            print(md5_to_hex(int.from_bytes(chunk[4*g:4*g+4], byteorder='little')))
+            # print("Actually word")
+            # print(md5_to_hex(int.from_bytes(chunk[4*g:4*g+4], byteorder='little')))
             
             print("FAMK")
             print(md5_to_hex(to_rotate)) # should = FAMK

@@ -115,15 +115,16 @@ public class md5 {
 
         // storing as an int 
         for (int x = 0; x < padded.length; x++) {
-            for (int y = 0; y < 64;) {
-                
-                int holder = padded[x][y];
-                // Systemt.out.prinln("holder is : " + Integer.toHexString(holder));
-                for (int z = 0; z < 4; z++) { // this just happens 4 times
+
+            for (int y = 0; y < 16; y++) {
+                int holder = padded[x][4*y + 3];
+                for(int z = 2; z >= 0 ; z--){
                     holder = holder << 8;
-                    holder = holder | (padded[x][y++] & 0xff);  // leading 1's are fixed here
+                    holder = holder | (padded[x][4*y + z] & 0xff);  // leading 1's are fixed here
                 }
-                wordList[x][y/4 - 1] = holder;
+                
+                
+                wordList[x][y] = holder;
             }
         }
 
@@ -172,54 +173,62 @@ public class md5 {
 
         
         // Check
-        // System.out.println(0x98badcfe == fResult);  // for F 0xfedcba98
+        //System.out.println(0x98badcfe == fResult);  // for F 0xfedcba98
         
-        // System.out.println(printhex(fResult));
+        System.out.println("\nstep : " + step);
+        System.out.println(Integer.toHexString(fResult));
+
         // System.out.println(fResult == 0x1c1453be); // for G
-        System.out.println("step : " + step);
+        
 
         // switched to long for now because adding ints can make int overflow
         long FandA = ((initial[0]) + (fResult)) % 0x100000000L; 
-        System.out.println("\nFandA");
+        System.out.println("FandA");
         // System.out.println((int)FandA == 0xffffffff);  // for F
-        System.out.println(printhex(FandA));
-        // System.out.println(Long.toHexString(FandA));
+        // System.out.println(printhex(FandA));
+        System.out.println(Long.toHexString(FandA));
 
-        System.out.println("wordList is " + Integer.toHexString(wordList[block][M[step]]));
+        // System.out.println("wordList is " + Integer.toHexString(wordList[block][M[step]]));
 
         long FAM = ((FandA + (wordList[block][M[step]])) % 0x100000000L) & 0xFFFFFFFFL;
         System.out.println("M[Step] : " + M[step]);
         System.out.println("Block : " + block);
-        System.out.println("wordList: " + String.format("%8x",  wordList[block][M[step]]).replace(' ', '0') + " ");
+        System.out.println("wordList: " + Integer.toHexString(wordList[block][M[step]]).replace(' ', '0') + " ");
         // System.out.println(M[step]);
-        System.out.println("\nFAM");
+        System.out.println("FAM");
         // System.out.println(FAM == 0x179656853L); // for F , rachel: got 54686578 from online calculator?
         System.out.println(printhex(FAM));
         // System.out.println(Long.toHexString(FAM));
+        // System.out.println("HERE");
 
-        long FAMK = ((FAM + (K[step])) % 0x100000000L) & 0xFFFFFFFFL;
-        System.out.println("\nFAMK");
+        long FAMK = (FAM + (K[step])) % 0x100000000L;
+        System.out.println("FAMK");
         // System.out.println("\n" + Integer.toHexString(K[step]));
         // System.out.println(FAMK == 0x250d00ccbL);  // for F, rachel: got 2BD309F0
-        System.out.println(printhex(FAMK));
+        System.out.println(Long.toHexString(FAMK));
         // 250d00ccb
 
+        // long FAMKS = FAMK & 0xFFFFFFFF; // added cause python has this
+        long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) )  % 0x100000000L;
+        System.out.println("First shift : " + (FAMK << S[step]));
+        System.out.println("Second shift: " + (FAMK >> (32 - S[step])));
+        System.out.println("The or: " + ((FAMK << S[step]) | (FAMK >> (32 - S[step]))) );
 
-        long FAMKS = ( (FAMK << S[step]) | (FAMK >> (32 - S[step])) ) & 0xFFFFFFFFL ;
         System.out.println("rotate_amount: " + S[step]);
-        System.out.println("\nFAMKS");
+        // System.out.println("\nFAMKS");
         // System.out.println(FAMKS == 0x680665a8);  // for f | works if it's casted into an int
         //                                           // rachel: got E984F815
-        System.out.println(printhex(FAMKS));
+        System.out.println("FAMKS");
+        System.out.println(Long.toHexString(FAMKS));
 
-        long FAMKSB = ((FAMKS + (initial[1])) % 0x100000000L ) & 0xFFFFFFFFL;
-        System.out.println("\nFAMKSB");
+        long FAMKSB = (FAMKS + (initial[1])) % 0x100000000L;
+        System.out.println("FAMKSB");
         // System.out.println("\n" + Integer.toHexString(initial[1]));
         // System.out.println( FAMKSB == 0x57d41131); // for F // 0x7330C604 // rachel: got D952A39E
-        System.out.println(printhex(FAMKSB));
+        System.out.println(Long.toHexString(FAMKSB));
         // 57d41131
 
-        // System.out.println(Integer.toHexString( (int) FAMKSB));
+        //System.out.println(Integer.toHexString((int)FAMKSB));
                                     //  cfcdeecf
                                     // bb3a5b2e02
                                     // 57d41131
@@ -265,7 +274,7 @@ public class md5 {
                 K[index] = (int)(long)( (1L << 32) * Math.abs(Math.sin(index + 1)) );
             }
 
-            // printIntArray(K);
+            //printIntArray(K);
 
 
 
@@ -306,8 +315,13 @@ public class md5 {
             int[] initial = new int[4];
             // for (int block = 0; block < wordList.length; block++) {
             initial = OrigInitial.clone();
-            for (int step = 0; step < 5; step++) { 
+
+            for (int step = 0; step < 7; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
+                // System.out.println("a: " + Integer.toHexString(initial[0]));
+                // System.out.println("b: " + Integer.toHexString(initial[1]));
+                // System.out.println("c: " + Integer.toHexString(initial[2]));
+                // System.out.println("d: " + Integer.toHexString(initial[3]));
             }
             //}
             
