@@ -99,10 +99,12 @@ Rachel fixed everything. I'm running test cases to make sure. Finishing presenta
 
 
 Sources 
+
 https://www.digitizationguidelines.gov/term.php?term=hashalgorithm 
+
 https://www.techtarget.com/searchdatamanagement/definition/hashing
 
-
+https://www.zdnet.com/article/a-quarter-of-major-cmss-use-outdated-md5-as-the-default-password-hashing-scheme/
 
 https://www.lifewire.com/what-is-md5-2625937
 
