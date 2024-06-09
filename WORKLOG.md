@@ -76,6 +76,19 @@ Finished the functionF and started to move on to the next step
 ### 2024/05/31
 Changed how the functionF function works in order to use it for the whole md5 main alogrithm
 
+<<<<<<< HEAD
+
+
+https://www.lifewire.com/what-is-md5-2625937
+
+https://medium.com/innoviletech/difference-between-md4-and-md5-encryption-3f4a7f42d251 
+
+https://us.norton.com/blog/privacy/mdfive-hash
+
+https://www.kb.cert.org/vuls/id/836068 
+
+https://www.comparitech.com/blog/information-security/what-is-a-collision-attack/
+=======
 ### 2024/06/01 - 06/02
 No work done due to trip and was working on a different project 4 a different class.
 
@@ -97,3 +110,4 @@ Figured out that we messed up word storage. Rachel fixed it. In process of figur
 Sources 
 https://www.digitizationguidelines.gov/term.php?term=hashalgorithm 
 https://www.techtarget.com/searchdatamanagement/definition/hashing
+>>>>>>> rachel

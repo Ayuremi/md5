@@ -320,7 +320,7 @@ public class md5 {
                 initial = OrigInitial.clone();
 
                 for (int step = 0; step < 64; step++) { 
-                    function(wordList, M, K, S, 0, step, initial);
+                    function(wordList, M, K, S, block, step, initial);
                     // System.out.println("a: " + Integer.toHexString(initial[0]));
                     // System.out.println("b: " + Integer.toHexString(initial[1]));
                     // System.out.println("c: " + Integer.toHexString(initial[2]));
