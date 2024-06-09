@@ -90,3 +90,22 @@ We have a constant to add to the word and the initial value. The constant, let's
 or in more math terms
 the absolute value of (sin(i + 1)) * 2 to the 32nd power)
 ```
+
+We also have a specific amount to bit shift a word by. 
+```
+Round 1: 7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
+Round 2: 5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,
+Round 3: 4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
+Round 4: 6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21
+```
+Notice that each round consists of four repeating numbers. (These numbers repeat because it's just easier to iterate over) 
+
+Then we we have the bitwise operations for each round
+```
+Round 1: (B & C) | (~B & D)
+Round 2: (B & D) | (C & ~D)
+Round 3: (B ^ C ^ D)
+Round 4 : C⊕(B∨¬D)
+```
+Got all that?
+![Studying](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW95bGtrbjBhbmJpamphOTQ1NHV5ajkwbmJoc2g3dzMyNnUxODBmMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KCqO4k31TnkC2pT5LY/giphy-downsized-large.gif)
