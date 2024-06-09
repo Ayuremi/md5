@@ -15,6 +15,7 @@ Now google or whatever service you use for emails has to verify that you have ty
 
 ### Well, why don't services save passwords directly?
 Saving passwords makes it easier for any malicious entity to hackjack user accounts. If black hat hackers (the bad guys) happen to break into a database and finds account names and passwords imagine the havoc they can produce! But we still need to verify whether or not you have typed the right password. This an instance where hash alogrithims comes in. You see, instead of saving your password directly, the service saves your password's hash. So everytime you want to login to your account instead of comparing the password you typed in against the password they have in their database, they take the password you typed in and put it through a hash algorithim. Then they compare the hash produced with the hash they have saved. If the two match, you are granted access into your account!
+![Login Services be like](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/It's%20the%20same%20thing.png)
 
 ### What prevents the bad guys from reversing the hash to get the password?
 Hash algorithims are designed to be one way functions, so if you happen to get an output (a hash), it would be very difficult to reverse the algorithim determine the input (the password or original data). 
