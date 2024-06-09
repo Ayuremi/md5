@@ -44,6 +44,9 @@ I tried to find out what was going wrong with the code but was unsuccessful. I u
 ### 6/7/24
 We worked together in class to find out what was wrong with the code. I used the python and java implementations to compare our answers and we found out that our words were being stored in the wrong endianess which led to the wrong answers when performing modular addition on that step. Will work more on this to fix it because it broke again at the shifting.
 
+### 6/9/24
+I fixed all the problems, which there was a lot of endianess problems. I fixed bit shifting and the wordlist message length being stored in the wrong endianess and the output also being in the wrong endianess. I then expanded the code to work for ultiple blocks. I tested it with everything and it seemed to work.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
