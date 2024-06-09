@@ -35,6 +35,18 @@ We finished the G function but not sure if it works because the website we were 
 ### 6/3/24
 We worked together in class to finish up the md5 function but there was an error and the md5 output is not the same from websites. We checked f and the f function should work.
 
+### 6/5/24
+We worked together to try and figure out what is wrong with our md5 function. We went back to looking for other websites that have the intermediary values of the md5. We changed K to be computed through a formula instead.
+
+### 6/6/24
+I tried to find out what was going wrong with the code but was unsuccessful. I used online calculators to manually calculate values but they gave different answers than the python program so I'm really confused now. Fixed some code in some areas with misconceptions.
+
+### 6/7/24
+We worked together in class to find out what was wrong with the code. I used the python and java implementations to compare our answers and we found out that our words were being stored in the wrong endianess which led to the wrong answers when performing modular addition on that step. Will work more on this to fix it because it broke again at the shifting.
+
+### 6/9/24
+I fixed all the problems, which there was a lot of endianess problems. I fixed bit shifting and the wordlist message length being stored in the wrong endianess and the output also being in the wrong endianess. I then expanded the code to work for ultiple blocks. I tested it with everything and it seemed to work.
+
 ## Nathaniel Ciu
 
 ### 2024/05/22
@@ -64,6 +76,7 @@ Finished the functionF and started to move on to the next step
 ### 2024/05/31
 Changed how the functionF function works in order to use it for the whole md5 main alogrithm
 
+<<<<<<< HEAD
 
 
 https://www.lifewire.com/what-is-md5-2625937
@@ -75,3 +88,26 @@ https://us.norton.com/blog/privacy/mdfive-hash
 https://www.kb.cert.org/vuls/id/836068 
 
 https://www.comparitech.com/blog/information-security/what-is-a-collision-attack/
+=======
+### 2024/06/01 - 06/02
+No work done due to trip and was working on a different project 4 a different class.
+
+### 2024/06/03
+Debugging MD5 main alogrithim b/c something went wrong 
+
+### 2024/06/05
+Continuing to try and fix our md5 problem
+
+### 2024/06/06
+Figured out what was going on in our python reference and will now use it to debug our md5 replicator.
+
+### 2024/06/07
+Figured out that we messed up word storage. Rachel fixed it. In process of figure out why our algorithm messes up on "step 7."
+
+
+
+
+Sources 
+https://www.digitizationguidelines.gov/term.php?term=hashalgorithm 
+https://www.techtarget.com/searchdatamanagement/definition/hashing
+>>>>>>> rachel
