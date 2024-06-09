@@ -87,7 +87,7 @@ public class md5 {
 
         // add message length bits to last 8 bytes
         for (int x = 0; x < 8; x++) {
-            padded2D[curBlock][63-x] = (byte)(bits >> (x * 8));
+            padded2D[curBlock][56+x] = (byte)(bits >> (x * 8));
             // may give out leading 1's | Fixed in splitIntoWords
         }
         // and done!
@@ -254,6 +254,9 @@ public class md5 {
 
             // splitting into "words"
             int[][] wordList = splitIntoWords(padded);
+            for (int[] block : wordList){
+                for (int word : block) System.out.println(Integer.toHexString(word));
+            }
 
             int[] OrigInitial = new int[]{0x67452301, (int)0xefcdab89L, (int)0x98badcfeL, 0x10325476};
             //for (int x = 0; x < 4; x++) System.out.println(x + ": " + Integer.toHexString(OrigInitial[x]));
@@ -316,7 +319,7 @@ public class md5 {
             // for (int block = 0; block < wordList.length; block++) {
             initial = OrigInitial.clone();
 
-            for (int step = 0; step < 15; step++) { 
+            for (int step = 0; step < 16; step++) { 
                 function(wordList, M, K, S, 0, step, initial);
                 // System.out.println("a: " + Integer.toHexString(initial[0]));
                 // System.out.println("b: " + Integer.toHexString(initial[1]));
