@@ -316,24 +316,26 @@ public class md5 {
             // }
             
             int[] initial = new int[]{0x67452301, (int)0xefcdab89L, (int)0x98badcfeL, 0x10325476};
-            // for (int block = 0; block < wordList.length; block++) {
-            //initial = OrigInitial.clone();
-
-            for (int step = 0; step < 64; step++) { 
-                function(wordList, M, K, S, 0, step, initial);
-                // System.out.println("a: " + Integer.toHexString(initial[0]));
-                // System.out.println("b: " + Integer.toHexString(initial[1]));
-                // System.out.println("c: " + Integer.toHexString(initial[2]));
-                // System.out.println("d: " + Integer.toHexString(initial[3]));
-            }
-            //}
             
-            for (int init: OrigInitial) System.out.print(Integer.toHexString(init) + " ");
-            System.out.println("");
-            for (int init: initial) System.out.print(Integer.toHexString(init) + " ");
-            for (int x = 0; x < 4; x++){
-                long temp = ((long)initial[x] + (long)OrigInitial[x] )% 0x100000000L;
-                OrigInitial[x] = (int)temp;
+            for (int block = 0; block < wordList.length; block++) {
+                initial = OrigInitial.clone();
+
+                for (int step = 0; step < 64; step++) { 
+                    function(wordList, M, K, S, 0, step, initial);
+                    // System.out.println("a: " + Integer.toHexString(initial[0]));
+                    // System.out.println("b: " + Integer.toHexString(initial[1]));
+                    // System.out.println("c: " + Integer.toHexString(initial[2]));
+                    // System.out.println("d: " + Integer.toHexString(initial[3]));
+                }
+                //}
+                
+                for (int init: OrigInitial) System.out.print(Integer.toHexString(init) + " ");
+                System.out.println("");
+                for (int init: initial) System.out.print(Integer.toHexString(init) + " ");
+                for (int x = 0; x < 4; x++){
+                    long temp = ((long)initial[x] + (long)OrigInitial[x] )% 0x100000000L;
+                    OrigInitial[x] = (int)temp;
+                }
             }
             
             // int[] temp = new int[]{0x799d1352,0x2c34dfa2,0xde1673be,0x4b976282};
