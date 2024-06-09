@@ -51,8 +51,5 @@ The pigeonhole principle basically goes like this if there are more inputs than 
 
 The reason why SHA-256 is considered secure is because it's not really fleasible (for now) to find two different inputs that result in the same output. Why? Well because SHA-256 produces longer hashes there are way more combinations available so finding a collision with today's technology would take too much time, effort, and resources. This used to be the case for MD5 as well! Even though MD5 was theorically collision vulnerable, the technology of the 1990's could not practically find two inputs that shared the same output within a reasonable time frame and resource investment, which was why people still used it after the 1996 research paper. 
 
-### Classical Collision Attack
-In a classical Collision attack, a malicious entity brute forces until they find an input that matches the output hash. 
-
 ## How MD5 Works
 
