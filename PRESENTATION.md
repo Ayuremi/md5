@@ -40,7 +40,7 @@ But MD5 suffered from similar collision problems. In 1996, research was publishe
 ![Some devs when they find out they shouldn't use MD5](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/pictures/But%20I%20like%20it%20sad%20face.png)
 
 ## What are collision attacks?
-Because MD5's main weakness is collisions attacks, let's 
+Because MD5's main weakness is collisions attacks, let's dive into them in greater detail!
 
 ## How MD5 Works
 
