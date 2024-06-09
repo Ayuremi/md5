@@ -320,18 +320,6 @@ public class md5 {
             for (int block = 0; block < wordList.length; block++) {
                 initial = OrigInitial.clone();
 
-<<<<<<< HEAD
-            // for (int block = 0; block < wordList.length; block++) {
-            for (int step = 0; step < 1; step++) { 
-                function(wordList, M, K, S, 0, step, initial);
-            }
-            //}
-            for (int x = 0; x < 4; x++){
-                long temp = initial[x] & 0xFFFFFFFFL;
-                temp += OrigInitial[x] & 0xFFFFFFFFL;
-                temp = temp % 0x100000000L;
-                initial[x] = (int)temp;
-=======
                 for (int step = 0; step < 64; step++) { 
                     function(wordList, M, K, S, 0, step, initial);
                     // System.out.println("a: " + Integer.toHexString(initial[0]));
@@ -348,7 +336,6 @@ public class md5 {
                     long temp = ((long)initial[x] + (long)OrigInitial[x] )% 0x100000000L;
                     OrigInitial[x] = (int)temp;
                 }
->>>>>>> rachel
             }
             
             // int[] temp = new int[]{0x799d1352,0x2c34dfa2,0xde1673be,0x4b976282};
