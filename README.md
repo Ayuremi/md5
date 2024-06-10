@@ -28,6 +28,6 @@ The program will print out the md5 hash of the input string.
 
 
 
-[Video Link Placeholder]()
+[Video Link](https://drive.google.com/file/d/11QuT6jY5cQ6BHqmfuqutS1FprQ10LRYD/view?usp=sharing)
 
 [Presentation.md](https://github.com/Stuycs-K/final-project-09-gao-rachel-ciu-nathaniel/blob/main/PRESENTATION.md)
