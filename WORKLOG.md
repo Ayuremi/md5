@@ -97,6 +97,8 @@ Found that the algorithim messes up with shifting. And started working on presen
 ### 2024/06/09 
 Rachel fixed everything. I'm running test cases to make sure. Finishing presentation.md and video by tonight!
 
+### 2024/06/10
+Double checking we met requirements
 
 Sources/References
 
@@ -119,3 +121,21 @@ https://www.comparitech.com/blog/information-security/what-is-a-collision-attack
 https://www.comparitech.com/blog/information-security/md5-algorithm-with-examples/
 
 https://rosettacode.org/wiki/MD5/Implementation#Python
+
+https://www.gomyitguy.com/blog-news-updates/hash-collision-attacks 
+
+https://eprint.iacr.org/2004/199.pdf 
+
+https://www.ssl.com/faqs/what-is-an-x-509-certificate/ 
+
+https://www.speedguide.net/news/md5-is-officially-insecure-hackers-break-ssl-certificates-2752 
+
+https://thehackernews.com/2022/11/french-electricity-provider-fined-for.html 
+
+https://www.techtarget.com/searchsecurity/definition/checksum#How%20to%20check%20a%20MD5%20checksum
+
+
+
+
+
+
