@@ -219,7 +219,8 @@ The resulting hash of "Hello World" should be:
 `b10a8db164e0754105b7a99be72e3fe5`
 
 #### Inputs with multiple blocks
-
+If the input string, when padded, results in multiple blocks, the operations above are repeated for each block.
+The only difference is that after each block is completed, the next block's initial `A, B, C, D` values are the previous block's resulting `A, B, C, D` values.
 
 
 
