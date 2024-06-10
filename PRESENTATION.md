@@ -134,11 +134,14 @@ The result should be : 0x89badcfe
 
 Then add that result with the the correct word! In this case (round 0, step 0), we need to add word #0 with the result of the previous expression! Modulo this result with 0x100000000L. And after that modulo, mudulo (yes again) that result with 0xFFFFFFFFL.
 ```
-0x89badcfe + 
+( (0x89badcfe + 0x6c6c6548) % 0x100000000L ) % 0xFFFFFFFFL
 ```
 This result should be: 0xffffffffffffffff
 
 Then add the correct K value! In this case (round 0, step 0), we need to add K0 to the previous result! Also modulo this result with 0x100000000L. And after that modulo, modulo (yes again) that result with 0xFFFFFFFFL.
+```
+
+```
 This result should be: 
 
 After that we need to shift the bits of our result (and modulo it)!
