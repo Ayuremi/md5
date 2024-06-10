@@ -140,30 +140,41 @@ This result should be: 0xffffffffffffffff
 
 Then add the correct K value! In this case (round 0, step 0), we need to add K0 to the previous result! Also modulo this result with 0x100000000L. And after that modulo, modulo (yes again) that result with 0xFFFFFFFFL.
 ```
-
+( (0xffffffffffffffff + d76aa478) % 0x100000000L ) % 0xFFFFFFFFL
 ```
-This result should be: 
+This result should be: 0x43d709bf
 
-After that we need to shift the bits of our result (and modulo it)!
+After that we need to shift the bits of our result and modulo it!
 ```
-(result << correctShift) | (FAMK >> (32 - correctShift) )  % 0x100000000L
+( (result << correctShift) | (result >> (32 - correctShift) )  % 0x100000000L
 ```
 In this case (round 0, step 0), we need to shift by 7!
+```
+( (0x43d709bf << 7) | 0x43d709bf >> (32 - 7) )  % 0x100000000L
+```
+This result should be: 0xeb84dfa1
 
-After that add B to the result of the previous expression! 
+After that add B to the result of the previous expression and modulo it! 
+```
+(eb84dfa1 + B) % 0x100000000L
+```
+This result should be: 0xdb528b2a
 
 Then re-assign the values as follows
 ```
 A = D
 D = C
 C = B
-B = the value we just calculated!
+B = the value we just calculated! 0xdb528b2a
 ```
 
 Repeat the first round 15 more times, exchanging constants as needed! 
 
 After that move on the the 2nd, 3rd, and 4th round!
-The only change that happens is the bitwise operation! The constants should be easily iterated through!
+The only change that happens is the bitwise operation and the constants (which should be easily iterated through)!
+
+The resulting hash should be:
+b10a8db164e0754105b7a99be72e3fe5
 
 
 
