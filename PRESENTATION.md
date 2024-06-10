@@ -124,7 +124,7 @@ Let's actually start getting into the main algorithim!
 ### Main algorithim
 Let's use "Hello World" as an exmample!
 
-For the first round
+For the first round first step
 
 Take the value of the Round 0 bitwise operation and add it to the initial value A and modulo that result with 0x100000000L!
 ``` 
