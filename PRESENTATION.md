@@ -70,7 +70,7 @@ Before we move on with manipulating said words we need to establish a few consta
 There are four initials values. Let's call then A,B,C, and D!
 ```
 A = 0x67452301 
-B = 0x67452301  
+B = 0xefcdab89 
 C = 0x98badcfe
 D = 0x10325476
 ```
