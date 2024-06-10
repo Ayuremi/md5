@@ -160,7 +160,7 @@ M14: 00000000 00000000 00000000 00000000
 M15: 00000000 00000000 00000000 01011000 
 ```
 
-For the first round first step
+#### Bitwise Operation
 
 Take the value of the Round 0 bitwise operation and add it to the initial value `A`!
 Then we want to modulo the result with `0x100000000L` (or `2^32`) to keep the value under the max `int` value.
@@ -171,11 +171,15 @@ Then we want to modulo the result with `0x100000000L` (or `2^32`) to keep the va
 The result of the bitwise operation should be : `0x98badcfe`
 After adding `A`, and modulo `0x100000000L`, the result is: `0xffffffff`
 
+#### Words
+
 Then add that result with the the corresponding round word! In this case (round 0, step 0), we need to add word `M0` with the result of the previous expression! Modulo this result with `0x100000000L`. And after that modulo, `AND (&)` that result with `0xFFFFFFFFL` to turn any leading bits into `0`.
 ```
 ( (0xffffffff + 0x6c6c6548) % 0x100000000L ) & 0xFFFFFFFFL
 ```
 This result should be: `0x6c6c6547`
+
+#### K Constant
 
 Then add the correct K value! In this case (round 0, step 0), we need to add `K0` to the previous result! Also modulo this result with `0x100000000L`. And after that modulo, `AND (&)` that result with `0xFFFFFFFFL`.
 ```
@@ -183,6 +187,7 @@ Then add the correct K value! In this case (round 0, step 0), we need to add `K0
 ```
 This result should be: `0x43d709bf`
 
+#### Bit Shifting, S
 After that we need to shift the bits of our result and modulo it!
 ```
 ( (result << correctShift) | (result >> (32 - correctShift) ) )  % 0x100000000L
@@ -193,11 +198,15 @@ In this case (round 0, step 0), we need to shift by 7!
 ```
 This result should be: `0xeb84dfa1`
 
+#### B Value
+
 After that add `B` to the result of the previous expression and modulo it! 
 ```
 (eb84dfa1 + B) % 0x100000000L
 ```
 This result should be: `0xdb528b2a`
+
+#### Reassignment
 
 Then re-assign the values as follows
 ```
@@ -212,13 +221,14 @@ Repeat the first round 15 more times, exchanging constants as needed!
 After that move on the the 2nd, 3rd, and 4th round!
 The only change that happens is the bitwise operation and the constants (which should be easily iterated through)!
 
+#### Adding Initial Values
 Once all rounds of the block have been run, the final step is to add the initial `A, B, C, D` values to the new ones and modulo `0x100000000L`. 
 
 After doing so, the resulting hash can be retrieved by appending the hex values of `A, B, C, D` together.
 The resulting hash of "Hello World" should be:
 `b10a8db164e0754105b7a99be72e3fe5`
 
-#### Inputs with multiple blocks
+### Inputs with multiple blocks
 If the input string, when padded, results in multiple blocks, the operations above are repeated for each block.
 The only difference is that after each block is completed, the next block's initial `A, B, C, D` values are the previous block's resulting `A, B, C, D` values.
 
