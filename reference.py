@@ -109,7 +109,7 @@ def to_hex(value):
     return '{:02x}'.format(value)
 
 if __name__=='__main__':
-    demo =[b"They are deterministic"]
+    demo =[b"Hello World"]
     # demo = [b"", b"a", b"abc", b"message digest", b"abcdefghijklmnopqrstuvwxyz",
     #         b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
     #         b"12345678901234567890123456789012345678901234567890123456789012345678901234567890"]

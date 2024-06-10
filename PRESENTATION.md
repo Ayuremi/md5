@@ -89,13 +89,13 @@ Round 3: 0, 7, 14, 5, 12, 3, 10, 1, 8, 15, 6, 13, 4, 11, 2, 9
 
 We have a constant to add to the word and the initial value. The constant, let's call it K, can be calculated using
 ```
-(1L << 32) * Math.abs(Math.sin(i + 1)) with i denoting the K value. Ex.) if i = 0, then Ki = K0 = 0xd76aa478
+(1L << 32) * Math.abs(Math.sin(i + 1)) with i denoting the K value. Ex. if i = 0, then Ki = K0 = 0xd76aa478
 or in more math terms
-the absolute value of (sin(i + 1)) * 2 to the 32nd power)
+the absolute value of (sin(i + 1)) * 2 to the 32nd power
 ```
 
 
-We also have a specific amount to bit shift a word by. 
+We also have a specific amount to bit shift a word by, called S. 
 ```
 Round 0: 7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
 Round 1: 5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,
@@ -122,43 +122,82 @@ Got all that?
 Let's actually start getting into the main algorithim!
 
 ### Main algorithim
-Let's use "Hello World" as an exmample!
+Let's use "Hello World" as an example!
+
+We first want to take the bits and store them into 512 blocks, and add additional padding. The last 8 bytes should be the number of bits in the string represented in binary. 
+
+For "Hello World" the resulting block should look like this:
+
+```
+01001000 01100101 01101100 01101100 01101111 00100000 01010111 01101111 
+01110010 01101100 01100100 10000000 00000000 00000000 00000000 00000000
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 01011000 
+```
+
+Then, we want to separate the block into 16 "words", each being 4 bytes long.
+
+```
+M0: 01001000 01100101 01101100 01101100
+M1: 01101111 00100000 01010111 01101111 
+M2: 01110010 01101100 01100100 10000000
+M3: 00000000 00000000 00000000 00000000
+M4: 00000000 00000000 00000000 00000000
+M5: 00000000 00000000 00000000 00000000
+M6: 00000000 00000000 00000000 00000000
+M7: 00000000 00000000 00000000 00000000
+M8: 00000000 00000000 00000000 00000000
+M9: 00000000 00000000 00000000 00000000
+M10: 00000000 00000000 00000000 00000000
+M11: 00000000 00000000 00000000 00000000
+M12: 00000000 00000000 00000000 00000000
+M13: 00000000 00000000 00000000 00000000
+M14: 00000000 00000000 00000000 00000000
+M15: 00000000 00000000 00000000 01011000 
+```
 
 For the first round first step
 
-Take the value of the Round 0 bitwise operation and add it to the initial value A and modulo that result with 0x100000000L!
+Take the value of the Round 0 bitwise operation and add it to the initial value `A`!
+Then we want to modulo the result with `0x100000000L` (or `2^32`) to keep the value under the max `int` value.
+
 ``` 
 (B & C) | (~B & D)
 ```
-The result should be : 0x89badcfe 
+The result of the bitwise operation should be : `0x98badcfe`
+After adding `A`, and modulo `0x100000000L`, the result is: `0xffffffff`
 
-Then add that result with the the correct word! In this case (round 0, step 0), we need to add word #0 with the result of the previous expression! Modulo this result with 0x100000000L. And after that modulo, mudulo (yes again) that result with 0xFFFFFFFFL.
+Then add that result with the the corresponding round word! In this case (round 0, step 0), we need to add word `M0` with the result of the previous expression! Modulo this result with `0x100000000L`. And after that modulo, `AND (&)` that result with `0xFFFFFFFFL` to turn any leading bits into `0`.
 ```
-( (0x89badcfe + 0x6c6c6548) % 0x100000000L ) % 0xFFFFFFFFL
+( (0xffffffff + 0x6c6c6548) % 0x100000000L ) & 0xFFFFFFFFL
 ```
-This result should be: 0xffffffffffffffff
+This result should be: `0x6c6c6547`
 
-Then add the correct K value! In this case (round 0, step 0), we need to add K0 to the previous result! Also modulo this result with 0x100000000L. And after that modulo, modulo (yes again) that result with 0xFFFFFFFFL.
+Then add the correct K value! In this case (round 0, step 0), we need to add `K0` to the previous result! Also modulo this result with `0x100000000L`. And after that modulo, `AND (&)` that result with `0xFFFFFFFFL`.
 ```
-( (0xffffffffffffffff + d76aa478) % 0x100000000L ) % 0xFFFFFFFFL
+( (0x6c6c6547 + 0xd76aa478) % 0x100000000L ) % 0xFFFFFFFFL
 ```
-This result should be: 0x43d709bf
+This result should be: `0x43d709bf`
 
 After that we need to shift the bits of our result and modulo it!
 ```
-( (result << correctShift) | (result >> (32 - correctShift) )  % 0x100000000L
+( (result << correctShift) | (result >> (32 - correctShift) ) )  % 0x100000000L
 ```
 In this case (round 0, step 0), we need to shift by 7!
 ```
 ( (0x43d709bf << 7) | 0x43d709bf >> (32 - 7) )  % 0x100000000L
 ```
-This result should be: 0xeb84dfa1
+This result should be: `0xeb84dfa1`
 
-After that add B to the result of the previous expression and modulo it! 
+After that add `B` to the result of the previous expression and modulo it! 
 ```
 (eb84dfa1 + B) % 0x100000000L
 ```
-This result should be: 0xdb528b2a
+This result should be: `0xdb528b2a`
 
 Then re-assign the values as follows
 ```
@@ -173,8 +212,15 @@ Repeat the first round 15 more times, exchanging constants as needed!
 After that move on the the 2nd, 3rd, and 4th round!
 The only change that happens is the bitwise operation and the constants (which should be easily iterated through)!
 
-The resulting hash should be:
-b10a8db164e0754105b7a99be72e3fe5
+Once all rounds of the block have been run, the final step is to add the initial `A, B, C, D` values to the new ones and modulo `0x100000000L`. 
+
+After doing so, the resulting hash can be retrieved by appending the hex values of `A, B, C, D` together.
+The resulting hash of "Hello World" should be:
+`b10a8db164e0754105b7a99be72e3fe5`
+
+#### Inputs with multiple blocks
+
+
 
 
 
